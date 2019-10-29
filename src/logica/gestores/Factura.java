@@ -261,10 +261,10 @@ public class Factura implements Printable
             mark = elem.getMarca().replace(" ", "");
             unit = elem.getUnidadMedida().replace(" ", "");          
             
-            if(fuera)
-                price = (int) elem.getPrecioVentaFuera();
-            else
-                price = (int) elem.getPrecioVenta();
+//            if(fuera)
+//                price = (int) elem.getPrecioVentaFuera();
+//            else
+            price = (int) elem.getPrecioVenta();
             //Validaciones para la longitud de el nombre, marca, medida, cantidad.
             if(name.length() > tamName)            
                 name = name.substring(0, tamName);

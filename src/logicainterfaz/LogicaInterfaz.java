@@ -29,8 +29,8 @@ import logica.Tequilazo;
 public class LogicaInterfaz 
 {    
     //Nombre y contraseña del usuario que tiene acceso al sistema.
-    private final String nombreUsuario = "tequilazo";
-    private final String contrasena = "tequila";
+    private final String nombreUsuario = "admin";
+    private final String contrasena = "pensilvania";
     
     /**
      * Tamaño para los bordes de los elementos de la interfaz.

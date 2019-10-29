@@ -1,14 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package bd;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import logica.Compra;
 import logica.Elemento;
 import logica.Venta;
 
@@ -16,8 +10,8 @@ import logica.Venta;
  *
  * @author Alejo
  */
-public class CrudElementoVendido {
-    
+public class CrudElementoVendido 
+{    
     /**
      * Conexión con la base de datos.
      */
@@ -34,7 +28,7 @@ public class CrudElementoVendido {
             return false;
         
         boolean bandera = true;
-        boolean fuera = sale.isFuera();
+        //boolean fuera = sale.isFuera();
         int idPurchase = sale.getId();
         ArrayList<Elemento> elements = sale.getElementos();
         int numElem = elements.size();
@@ -51,10 +45,10 @@ public class CrudElementoVendido {
             elem = elements.get(i);
             codeElem = elem.getCodigo();
             cant = elem.getCantidadSale();
-            if(fuera)
-                value = cant*elem.getPrecioVentaFuera(); 
-            else
-                value = cant*elem.getPrecioVenta(); 
+            //if(fuera)
+            //    value = cant*elem.getPrecioVentaFuera(); 
+            //else
+            value = cant*elem.getPrecioVenta(); 
             
             try 
             {

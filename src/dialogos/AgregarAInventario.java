@@ -66,7 +66,7 @@ public class AgregarAInventario extends javax.swing.JDialog
         this.unidadMedidas = new ArrayList<>();
         this.txtPrecioCompra.setHorizontalAlignment(JTextField.CENTER);
         this.txtPrecioVenta.setHorizontalAlignment(JTextField.CENTER);
-        this.txtPrecioVentaFuera.setHorizontalAlignment(JTextField.CENTER);
+        //this.txtPrecioVentaFuera.setHorizontalAlignment(JTextField.CENTER);
     }
 
     /**
@@ -211,7 +211,7 @@ public class AgregarAInventario extends javax.swing.JDialog
         double precioVentaFuera = -99;
         try 
         {
-            precioVentaFuera = Double.parseDouble(this.txtPrecioVentaFuera.getText().replace(".",""));
+            precioVentaFuera = 0.0;
             //Precio de venta fuera negativo.
             if(precioVentaFuera < 0)
                 return 9;
@@ -224,7 +224,7 @@ public class AgregarAInventario extends javax.swing.JDialog
         //Si avanza hasta acá es porque los datos son validos.
         Producto prod = new Producto(-1, name, category);
         this.componente = new Elemento(code, prod, mark, unitMed, stock,
-                        cantAct, precioComp, precioVent, precioVentaFuera);
+                        cantAct, precioComp, precioVent, 0.0);
         
         return -1;
     }    
@@ -282,10 +282,10 @@ public class AgregarAInventario extends javax.swing.JDialog
     {
         this.txtPrecioVenta.setText((int)precioVenta+"");
     }
-    public void setPrecioVentaFuera(double precioVentaFuera)
-    {
-        this.txtPrecioVentaFuera.setText((int)precioVentaFuera+"");
-    }
+//    public void setPrecioVentaFuera(double precioVentaFuera)
+//    {
+//        this.txtPrecioVentaFuera.setText((int)precioVentaFuera+"");
+//    }
     public void setCantAct(int cant)
     {
         this.spinCant.setValue(cant);
@@ -322,8 +322,6 @@ public class AgregarAInventario extends javax.swing.JDialog
         txtSalir = new javax.swing.JLabel();
         combMarcas = new javax.swing.JComboBox<>();
         lblPrecio1 = new javax.swing.JLabel();
-        lblPrecio2 = new javax.swing.JLabel();
-        txtPrecioVentaFuera = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -451,16 +449,6 @@ public class AgregarAInventario extends javax.swing.JDialog
         lblPrecio1.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         lblPrecio1.setText("Precio Venta");
 
-        lblPrecio2.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
-        lblPrecio2.setText("Precio Venta Fuera");
-
-        txtPrecioVentaFuera.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
-        txtPrecioVentaFuera.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtPrecioVentaFueraKeyReleased(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -477,28 +465,10 @@ public class AgregarAInventario extends javax.swing.JDialog
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lblPrecio)
-                .addGap(138, 138, 138))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(148, 148, 148)
-                        .addComponent(lblPrecio1))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(135, 135, 135)
-                        .addComponent(lblCantidad)))
+                .addGap(148, 148, 148)
+                .addComponent(lblPrecio1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(lblPrecio2)
-                        .addGap(121, 121, 121))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(spinCant, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(169, 169, 169))))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -534,14 +504,29 @@ public class AgregarAInventario extends javax.swing.JDialog
                                             .addGroup(jPanel2Layout.createSequentialGroup()
                                                 .addComponent(lblMedida)
                                                 .addGap(22, 22, 22)
-                                                .addComponent(combMedidas, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                                .addComponent(txtPrecioVentaFuera, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(86, 86, 86)
-                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(51, 51, 51)
-                        .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addComponent(combMedidas, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)))))))))
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(51, 51, 51)
+                .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(75, 75, 75))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(lblPrecio)
+                        .addGap(138, 138, 138))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGap(49, 49, 49)
+                            .addComponent(lblCantidad)
+                            .addGap(163, 163, 163))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(spinCant, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(169, 169, 169)))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -588,19 +573,15 @@ public class AgregarAInventario extends javax.swing.JDialog
                 .addComponent(lblPrecio1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtPrecioVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lblPrecio2)
-                .addGap(4, 4, 4)
-                .addComponent(txtPrecioVentaFuera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(26, 26, 26)
                 .addComponent(lblCantidad)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(spinCant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addGap(52, 52, 52)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 710));
@@ -683,10 +664,6 @@ public class AgregarAInventario extends javax.swing.JDialog
         this.validatePoints(this.txtPrecioVenta);
     }//GEN-LAST:event_txtPrecioVentaKeyReleased
 
-    private void txtPrecioVentaFueraKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioVentaFueraKeyReleased
-        this.validatePoints(this.txtPrecioVentaFuera);
-    }//GEN-LAST:event_txtPrecioVentaFueraKeyReleased
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnCancelar;
@@ -705,7 +682,6 @@ public class AgregarAInventario extends javax.swing.JDialog
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblPrecio;
     private javax.swing.JLabel lblPrecio1;
-    private javax.swing.JLabel lblPrecio2;
     private javax.swing.JLabel lblStock;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JSpinner spinCant;
@@ -714,7 +690,6 @@ public class AgregarAInventario extends javax.swing.JDialog
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtPrecioCompra;
     private javax.swing.JTextField txtPrecioVenta;
-    private javax.swing.JTextField txtPrecioVentaFuera;
     private javax.swing.JLabel txtSalir;
     // End of variables declaration//GEN-END:variables
 }

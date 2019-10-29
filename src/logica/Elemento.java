@@ -5,7 +5,6 @@ package logica;
  * Representa un producto con todos los datos necesarios para registrarlos
  * en la base de datos.
  * @author Luis Alejandro Gómez C.
- * @author Ever Peña B.
  * @version 1.0.0
  */
 public class Elemento
@@ -42,9 +41,22 @@ public class Elemento
      * Cantidad existente actualmente en el inventario del negocio.
      */
     private int cantidadActual;
+    
+    /**
+     * Precio al que se compra en elemento.
+     */
     private double precioCompra;
+    
+    /**
+     * Precio con el cual se va vender el elemento.
+     */
     private double precioVenta;   
+    
     private double precioVentaFuera;
+    
+    /**
+     * Cantidad actualmente disponible en el inventario.
+     */
     private int cantidadSale;
     //private boolean fuera;
 
@@ -100,13 +112,13 @@ public class Elemento
         this.precioVenta = precioVenta;
     }    
 
-    public double getPrecioVentaFuera() {
-        return precioVentaFuera;
-    }
-
-    public void setPrecioVentaFuera(double precioVentaFuera) {
-        this.precioVentaFuera = precioVentaFuera;
-    }    
+//    public double getPrecioVentaFuera() {
+//        return precioVentaFuera;
+//    }
+//
+//    public void setPrecioVentaFuera(double precioVentaFuera) {
+//        this.precioVentaFuera = precioVentaFuera;
+//    }    
         
     public int getStock() {
         return stock;

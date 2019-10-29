@@ -459,7 +459,7 @@ public class Tequilazo
                 if(indice == 2)
                 {
                     aux.setPrecioVenta(aux.getPrecioVenta() + this.VALOR_MICHELADA);
-                    aux.setPrecioVentaFuera(aux.getPrecioVentaFuera() + this.VALOR_MICHELADA);
+                    //aux.setPrecioVentaFuera(aux.getPrecioVentaFuera() + this.VALOR_MICHELADA);
                 }
                 return true;
             }                        

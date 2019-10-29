@@ -92,9 +92,9 @@ public class GestorTablas
         mi.addColumn("MARCA");
         mi.addColumn("MEDIDA");
         mi.addColumn("STOCK");
-        mi.addColumn("PRECIO COMPRA");
-        mi.addColumn("PRECIO VENTA");
-        mi.addColumn("PRECIO FUERA");
+        mi.addColumn("P. COMPRA");
+        mi.addColumn("P. VENTA");
+        //mi.addColumn("PRECIO FUERA");
         mi.addColumn("CANTIDAD ACTUAL");
         ti.setModel(mi);
         ti.setFont(this.fuenteTablas); 

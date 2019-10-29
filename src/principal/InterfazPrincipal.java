@@ -376,22 +376,20 @@ public class InterfazPrincipal extends javax.swing.JFrame
 
         txtLogo.setBackground(new java.awt.Color(0, 102, 153));
         txtLogo.setFont(new java.awt.Font("Candara", 1, 28)); // NOI18N
-        txtLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/tequilaLogo.png"))); // NOI18N
-        txtLogo.setText("SCI");
+        txtLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/polloMediano.png"))); // NOI18N
 
         javax.swing.GroupLayout panelLogoLayout = new javax.swing.GroupLayout(panelLogo);
         panelLogo.setLayout(panelLogoLayout);
         panelLogoLayout.setHorizontalGroup(
             panelLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelLogoLayout.createSequentialGroup()
-                .addComponent(txtLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLogoLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txtLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         panelLogoLayout.setVerticalGroup(
             panelLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelLogoLayout.createSequentialGroup()
-                .addComponent(txtLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(txtLogo, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
         );
 
         txtInicio.setBackground(new java.awt.Color(255, 255, 255));
@@ -585,7 +583,7 @@ public class InterfazPrincipal extends javax.swing.JFrame
                 .addComponent(txtScanner, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtAjustes, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
                 .addComponent(txtSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37))
         );
@@ -596,11 +594,11 @@ public class InterfazPrincipal extends javax.swing.JFrame
 
         jLabel7.setFont(new java.awt.Font("Source Code Pro Semibold", 0, 22)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Bar & Licores");
+        jLabel7.setText("Avícola & Salsamentaria");
 
         jLabel8.setFont(new java.awt.Font("Source Code Pro Semibold", 0, 22)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Tequilazo");
+        jLabel8.setText("Pensilvania");
 
         txtFecha.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         txtFecha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/calendario.png"))); // NOI18N
@@ -608,7 +606,7 @@ public class InterfazPrincipal extends javax.swing.JFrame
 
         txtNombre.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         txtNombre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/usuario.png"))); // NOI18N
-        txtNombre.setText("Jorge Miguel Rincon Herrera");
+        txtNombre.setText("Leidy Johanna Trujillo Ramirez");
 
         salir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconoCerrar.png"))); // NOI18N
         salir.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -624,23 +622,23 @@ public class InterfazPrincipal extends javax.swing.JFrame
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icono_cabecera2.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/salsamentaria.png"))); // NOI18N
 
         javax.swing.GroupLayout panelEncabLayout = new javax.swing.GroupLayout(panelEncab);
         panelEncab.setLayout(panelEncabLayout);
         panelEncabLayout.setHorizontalGroup(
             panelEncabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelEncabLayout.createSequentialGroup()
-                .addContainerGap(91, Short.MAX_VALUE)
+                .addContainerGap(78, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGroup(panelEncabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelEncabLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel7))
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelEncabLayout.createSequentialGroup()
-                        .addGap(36, 36, 36)
+                        .addGap(76, 76, 76)
                         .addComponent(jLabel8)))
-                .addGap(139, 139, 139)
+                .addGap(13, 13, 13)
                 .addGroup(panelEncabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelEncabLayout.createSequentialGroup()
                         .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2779,7 +2777,7 @@ public class InterfazPrincipal extends javax.swing.JFrame
                     modificar.setStock(el.getStock());
                     modificar.setPrecioCompra(el.getPrecioCompra());
                     modificar.setPrecioVenta(el.getPrecioVenta());
-                    modificar.setPrecioVentaFuera(el.getPrecioVentaFuera());
+                    //modificar.setPrecioVentaFuera(el.getPrecioVentaFuera());
                     modificar.setCantAct(el.getCantidadActual());                    
                     modificar.setVisible(true);
                     //Operaciones en la base de datos para modificar el elemento.

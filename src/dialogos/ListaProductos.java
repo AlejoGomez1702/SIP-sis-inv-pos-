@@ -91,13 +91,13 @@ public class ListaProductos extends javax.swing.JDialog
                 prod.getCantidadActual()+""};
                 modelo.addRow(fila);
             }
-            if(mostrar == 'v' && fuera)
-            {
-                String [] fila ={prod.getCodigo()+"", prod.getProducto().getNombre(),
-                prod.getMarca(), prod.getUnidadMedida(), (int)prod.getPrecioVentaFuera()+"",
-                prod.getCantidadActual()+""};
-                modelo.addRow(fila);
-            }
+//            if(mostrar == 'v' && fuera)
+//            {
+//                String [] fila ={prod.getCodigo()+"", prod.getProducto().getNombre(),
+//                prod.getMarca(), prod.getUnidadMedida(), (int)prod.getPrecioVentaFuera()+"",
+//                prod.getCantidadActual()+""};
+//                modelo.addRow(fila);
+//            }
             if(mostrar == 'v' && !fuera)
             {
                 String [] fila ={prod.getCodigo()+"", prod.getProducto().getNombre(),

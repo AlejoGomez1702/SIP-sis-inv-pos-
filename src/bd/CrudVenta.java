@@ -180,7 +180,7 @@ public class CrudVenta
         int cantActElement;
         double precCompElement;
         double precVentElement;
-        double precVentFuerElement;
+        //double precVentFuerElement;
         int cantSaleElement;
         //boolean fuera;
         
@@ -219,10 +219,10 @@ public class CrudVenta
                     cantActElement = rs.getInt("cantidadAct_elemento");
                     precCompElement = rs.getDouble("precio_compra_elemento");
                     precVentElement = rs.getDouble("precio_venta_elemento");
-                    precVentFuerElement = rs.getDouble("precio_venta_fuera");
+                    //precVentFuerElement = rs.getDouble("precio_venta_fuera");
                     cantSaleElement = rs.getInt("cantidad_sale");
                     element = new Elemento(codeElement, product, markElement, unitElement, stockElement,
-                    cantActElement, precCompElement, precVentElement, precVentFuerElement);
+                    cantActElement, precCompElement, precVentElement, 0.0);
                     element.setCantidadSale(cantSaleElement);
                     
                     elements.add(element);
@@ -266,8 +266,6 @@ public class CrudVenta
         
         return idDailySale;
     }
-    
-    
     
     /**
      * Mapea de una cadena separada por , a un objeto cliente.

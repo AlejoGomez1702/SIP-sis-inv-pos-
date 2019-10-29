@@ -3,8 +3,6 @@ package bd;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import logica.Compra;
 import logica.Elemento;
@@ -187,10 +185,10 @@ public class CrudCompra
                     cantActElement = rs.getInt("cantidadAct_elemento");
                     precCompElement = rs.getDouble("precio_compra_elemento");
                     precVentElement = rs.getDouble("precio_venta_elemento");
-                    precVentFuerElement = rs.getDouble("precio_venta_fuera");
+                    //precVentFuerElement = rs.getDouble("precio_venta_fuera");
                     cantSaleElement = rs.getInt("cantidad_sale");
                     element = new Elemento(codeElement, product, markElement, unitElement, stockElement,
-                    cantActElement, precCompElement, precVentElement, precVentFuerElement);
+                    cantActElement, precCompElement, precVentElement, 0.0);
                     element.setCantidadSale(cantSaleElement);
                     
                     elements.add(element);

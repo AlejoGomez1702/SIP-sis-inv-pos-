@@ -101,10 +101,10 @@ public class DetalleVenta extends javax.swing.JDialog
             {   
                 elem = elements.get(j);
                 fuera = sales.get(i).isFuera();
-                if(fuera)            
-                    unitario = elem.getPrecioVentaFuera();
-                else
-                    unitario = elem.getPrecioVenta();
+//                if(fuera)            
+//                    unitario = elem.getPrecioVentaFuera();
+//                else
+                unitario = elem.getPrecioVenta();
 
                 double precTotal = elem.getCantidadSale()*unitario;
 
@@ -143,10 +143,10 @@ public class DetalleVenta extends javax.swing.JDialog
         for (int i = 0; i < numVent; i++)
         {
             elem = venta.getElementos().get(i);
-            if(fuera)            
-                unitario = elem.getPrecioVentaFuera();
-            else
-                unitario = elem.getPrecioVenta();
+//            if(fuera)            
+//                unitario = elem.getPrecioVentaFuera();
+//            else
+            unitario = elem.getPrecioVenta();
             
             double precTotal = elem.getCantidadSale()*unitario;
             

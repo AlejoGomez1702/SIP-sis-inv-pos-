@@ -133,16 +133,16 @@ public class PintorTablas
         for (int i = 0; i < elements.size(); i++)
         {
             el = elements.get(i);
-            if(fuera)  
-            {
-                totalUnit = el.getPrecioVentaFuera()*el.getCantidadSale();
-                precio = el.getPrecioVentaFuera();
-            }                
-            else
-            {
-                totalUnit = el.getPrecioVenta()*el.getCantidadSale();  
-                precio = el.getPrecioVenta();
-            }
+//            if(fuera)  
+//            {
+//                totalUnit = el.getPrecioVentaFuera()*el.getCantidadSale();
+//                precio = el.getPrecioVentaFuera();
+//            }                
+//            else
+//            {
+            totalUnit = el.getPrecioVenta()*el.getCantidadSale();  
+            precio = el.getPrecioVenta();
+            //}
             
             JButton bot = new JButton("Eliminar");
             
@@ -178,7 +178,7 @@ public class PintorTablas
             {
                 String[] fila = {comp.getCodigo(), prod.getNombre(), comp.getMarca(),
                 comp.getUnidadMedida(), comp.getStock()+"", (int)comp.getPrecioCompra()+"", 
-                (int)comp.getPrecioVenta()+"", (int)comp.getPrecioVentaFuera()+"", comp.getCantidadActual()+""};
+                (int)comp.getPrecioVenta()+"", comp.getCantidadActual()+""};
 
                 modelTable.addRow(fila);
             }

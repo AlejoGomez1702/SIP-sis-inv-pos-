@@ -47,7 +47,7 @@ public class CrudElemento
         int stock = elem.getStock();
         double precComp = elem.getPrecioCompra();
         double precVent = elem.getPrecioVenta();
-        double precVentFuer = elem.getPrecioVentaFuera();
+        double precVentFuer = 0.0;
         int cantAct = elem.getCantidadActual();
         
         boolean bandera = true;
@@ -126,7 +126,7 @@ public class CrudElemento
         int stock = newElement.getStock();
         double precComp = newElement.getPrecioCompra();
         double precVent = newElement.getPrecioVenta();
-        double precVentFuer = newElement.getPrecioVentaFuera();
+        double precVentFuer = 0.0;
         int cantAct = newElement.getCantidadActual();
         
         String consulta = "UPDATE elemento SET codigo = ?, codigo_producto = ?, codigo_marca = ?, "
@@ -238,9 +238,9 @@ public class CrudElemento
                 cantElement = rs.getInt("elemento_cantidad");
                 precCompElement = rs.getDouble("elemento_precio_compra");
                 precVentElement = rs.getDouble("elemento_precio_venta");
-                precVentFuerElement = rs.getDouble("elemento_precio_venta_fuera");
+                //precVentFuerElement = rs.getDouble("elemento_precio_venta_fuera");
                 el = new Elemento(codeElement, p, markElement, unitElemento, stockElement,
-                    cantElement, precCompElement, precVentElement, precVentFuerElement); 
+                    cantElement, precCompElement, precVentElement, 0.0); 
             }
             
         } catch (SQLException e) 
@@ -308,9 +308,9 @@ public class CrudElemento
                 cantElement = rs.getInt("elemento_cantidad");
                 precCompElement = rs.getDouble("elemento_precio_compra");
                 precVentElement = rs.getDouble("elemento_precio_venta");
-                precVentFuerElement = rs.getDouble("elemento_precio_venta_fuera");
+                //precVentFuerElement = rs.getDouble("elemento_precio_venta_fuera");
                 e = new Elemento(codeElement, p, markElement, unitElemento, stockElement,
-                    cantElement, precCompElement, precVentElement, precVentFuerElement);
+                    cantElement, precCompElement, precVentElement, 0.0);
                 elementos.add(e);
             }            
         } catch(SQLException ex) 
