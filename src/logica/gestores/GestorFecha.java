@@ -200,6 +200,16 @@ public class GestorFecha
         
         return loc;        
     }
+    
+    public String convertDate(int indicador)
+    {
+        String fecha = "";
+        if(indicador == 1)
+            fecha = year + "/" + month + "/" + day + " " + "00" + ":" + minute;  
+        else
+            fecha = year + "/" + month + "/" + day + " " + hour + ":" + minute;
+        return fecha;
+    }
         
     
     //****GETERS****GETERS****GETERS****GETERS****GETERS****GETERS****GETERS****//

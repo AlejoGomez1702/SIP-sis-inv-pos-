@@ -14,7 +14,6 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
-import javax.swing.border.MatteBorder;
 import logica.Tequilazo;
 
 /**
@@ -29,7 +28,7 @@ import logica.Tequilazo;
 public class LogicaInterfaz 
 {    
     //Nombre y contraseña del usuario que tiene acceso al sistema.
-    private final String nombreUsuario = "admin";
+    private final String nombreUsuario = "avicola";
     private final String contrasena = "pensilvania";
     
     /**
@@ -301,7 +300,7 @@ public class LogicaInterfaz
      */
     public void comprobarSalida()
     {
-        int opc = JOptionPane.showConfirmDialog(null, "Realmente desea salir del TEQUILAZO?",
+        int opc = JOptionPane.showConfirmDialog(null, "Realmente desea salir del SISTEMA?",
                 "Confirmar salida", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         //0 para si || 1 para no
         if (opc == 0)

@@ -78,8 +78,8 @@ public class DetalleVenta extends javax.swing.JDialog
         this.txtTitleId.setText("");
         this.txtId.setText("Ventas Del Dia");
         this.txtFecha.setText(this.sales.get(0).getFechaHora().substring(0, 10));
-        this.checFuera.setSelected(true);
-        this.checDentro.setSelected(true);
+        //this.checFuera.setSelected(true);
+        //this.checDentro.setSelected(true);
         
         int a = modeloDetalleVenta.getRowCount()-1;
         for(int i=a; i>=0; i--)        
@@ -128,9 +128,9 @@ public class DetalleVenta extends javax.swing.JDialog
         this.txtTotal.setHorizontalAlignment(JTextField.CENTER);
         this.txtId.setText(venta.getId()+"");
         this.txtFecha.setText(venta.getFechaHora());
-        boolean fuera = venta.isFuera();
-        this.checFuera.setSelected(fuera);
-        this.checDentro.setSelected(!fuera);
+//        boolean fuera = venta.isFuera();
+//        this.checFuera.setSelected(fuera);
+//        this.checDentro.setSelected(!fuera);
        
         int a = modeloDetalleVenta.getRowCount()-1;
         for(int i=a; i>=0; i--)        
@@ -179,10 +179,9 @@ public class DetalleVenta extends javax.swing.JDialog
         txtTitleId = new javax.swing.JLabel();
         txtId = new javax.swing.JLabel();
         txtFecha = new javax.swing.JLabel();
-        checDentro = new javax.swing.JCheckBox();
-        checFuera = new javax.swing.JCheckBox();
         jLabel5 = new javax.swing.JLabel();
         txtTotal = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -257,17 +256,14 @@ public class DetalleVenta extends javax.swing.JDialog
 
         txtFecha.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
 
-        checDentro.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
-        checDentro.setText("Venta Dentro");
-
-        checFuera.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
-        checFuera.setText("Venta Fuera");
-
         jLabel5.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         jLabel5.setText("TOTAL:");
 
         txtTotal.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         txtTotal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel3.setFont(new java.awt.Font("Cambria", 0, 24)); // NOI18N
+        jLabel3.setText("Resumen De La Venta Seleccionada");
 
         javax.swing.GroupLayout panelContenidoLayout = new javax.swing.GroupLayout(panelContenido);
         panelContenido.setLayout(panelContenidoLayout);
@@ -283,13 +279,16 @@ public class DetalleVenta extends javax.swing.JDialog
                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelContenidoLayout.createSequentialGroup()
-                .addContainerGap(139, Short.MAX_VALUE)
+                .addContainerGap(90, Short.MAX_VALUE)
                 .addGroup(panelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelContenidoLayout.createSequentialGroup()
-                        .addComponent(checDentro)
-                        .addGap(49, 49, 49)
-                        .addComponent(checFuera)
-                        .addGap(105, 105, 105)
+                        .addComponent(jLabel5)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelContenidoLayout.createSequentialGroup()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(88, 88, 88)
                         .addGroup(panelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel2)
                             .addComponent(txtTitleId))
@@ -297,34 +296,24 @@ public class DetalleVenta extends javax.swing.JDialog
                         .addGroup(panelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(100, 100, 100))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelContenidoLayout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addGap(100, 100, 100))))
         );
         panelContenidoLayout.setVerticalGroup(
             panelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelContenidoLayout.createSequentialGroup()
                 .addComponent(panelEncabezado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(panelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelContenidoLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtTitleId, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel2))
-                        .addGap(18, 18, 18))
-                    .addGroup(panelContenidoLayout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addGroup(panelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(checDentro)
-                            .addComponent(checFuera))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jLabel2)))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(panelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -362,9 +351,8 @@ public class DetalleVenta extends javax.swing.JDialog
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JCheckBox checDentro;
-    private javax.swing.JCheckBox checFuera;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel panelContenido;

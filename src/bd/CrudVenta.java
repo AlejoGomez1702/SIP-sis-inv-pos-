@@ -57,7 +57,7 @@ public class CrudVenta
             ps.setString(1, cliente);
             ps.setString(2, fecha);
             ps.setString(3, obs);
-            ps.setBoolean(4, fuera);
+            ps.setBoolean(4, false);
             ps.setDouble(5, valor);
             ps.executeUpdate();            
         } catch (SQLException e) 
@@ -154,6 +154,51 @@ public class CrudVenta
         
         return sales;
     }
+    
+    public ArrayList<Venta> getAllSalesFromDates(String initialDate, String finishDate)
+    {
+        ArrayList<Venta> sales = new ArrayList<>();
+        String consulta = "SELECT * FROM venta WHERE fecha BETWEEN ? AND ? ORDER BY fecha";
+        
+        //Datos de la venta.
+        Venta v;
+        int id;
+        Cliente cliente;
+        String fecha;
+        String obs;
+        boolean fuera;
+        double valor;
+        
+        try 
+        {
+            PreparedStatement ps = this.conexion.getConexion().prepareStatement(consulta);
+            ps.setString(1, initialDate);
+            ps.setString(2, finishDate);            
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next())
+            {
+                id = rs.getInt("id");
+                cliente = convertClient(rs.getString("cliente"));
+                fecha = rs.getString("fecha");
+                obs = rs.getString("observacion");
+                fuera = rs.getInt("is_fuera") == 1;
+                //System.out.println("FUERAAA: " + fuera);
+                valor = rs.getDouble("valor_total");
+                v = new Venta(id, cliente, fecha, obs, fuera, valor);
+                sales.add(v);
+            }
+            //Obtener los elementos de la venta.
+            this.getAllElementsFromSales(sales);
+        } catch (SQLException e) 
+        {
+            return sales;
+        }
+        
+        return sales;
+    }
+    
+    
     
     /**
      * 

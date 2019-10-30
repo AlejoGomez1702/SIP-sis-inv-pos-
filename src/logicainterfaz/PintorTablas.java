@@ -270,6 +270,7 @@ public class PintorTablas
     {
         this.clearDataFromTable(modelTable);
         int numSal = sales.size();
+        //System.out.println("EL TAMAÑO DE VENTAS ES: " + numSal);
         Venta venta;          
         for (int i = 0; i < numSal; i++)
         {

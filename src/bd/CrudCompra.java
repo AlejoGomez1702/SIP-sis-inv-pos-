@@ -126,6 +126,70 @@ public class CrudCompra
     }
     
     /**
+     * Obtiene todas la compras registradas en la base de datos, según 
+     * una fecha inicial y una final.
+     * @return Lista de compras que ha realizado el negocio.
+     */
+    public ArrayList<Compra> getAllPurchasesFromDates(String initialDate, String finishDate)
+    {
+        ArrayList<Compra> purchases = new ArrayList<>();
+        String consulta = "SELECT DISTINCT c.id AS id_compra, c.fecha AS fecha_compra,"
+                + " p.codigo AS codigo_proveedor, p.nombre AS nombre_proveedor, p.nit AS nit_proveedor, "
+                + "p.celular AS celular_proveedor, c.valor_total AS valor_compra, c.observacion AS observacion_compra "
+                + "FROM compra AS c INNER JOIN elemento_comprado AS ec ON ec.id_compra=c.id INNER JOIN proveedor AS P "
+                + "ON c.codigo_proveedor = p.codigo WHERE fecha_compra BETWEEN ? AND ? ORDER BY c.fecha";
+        
+        //Datos para el proveedor.
+        Proveedor provider;
+        String providerCode;
+        String providerName;
+        String providerNit;
+        String providerPhone;
+        
+        //Datos para la compra.
+        Compra purchase;
+        int id;
+        String date;
+        double purchaseValue;
+        String purchaseObs;        
+        
+        try 
+        {
+            PreparedStatement ps = this.conexion.getConexion().prepareStatement(consulta);
+            ps.setString(1, initialDate);
+            ps.setString(2, finishDate);
+            ResultSet rs = ps.executeQuery();
+            //ResultSet rs = this.conexion.getStatement().executeQuery(consulta);
+            
+            while(rs.next())
+            {
+                //Datos para el proveedor.
+                providerCode = rs.getString("codigo_proveedor");
+                providerName = rs.getString("nombre_proveedor");
+                providerNit = rs.getString("nit_proveedor");
+                providerPhone = rs.getString("celular_proveedor");
+                provider = new Proveedor(providerCode, providerName, providerNit, providerPhone);
+
+                //Datos para la compra.
+                id = rs.getInt("id_compra");
+                date = rs.getString("fecha_compra");
+                purchaseValue = rs.getDouble("valor_compra");
+                purchaseObs = rs.getString("observacion_compra");  
+                purchase = new Compra(id, date, provider, purchaseValue, purchaseObs);
+                
+                purchases.add(purchase);
+            }               
+            //Llenando las compras con sus elementos.
+            this.getAllElementsFromPurchases(purchases);
+        } catch (SQLException e) 
+        {
+            return purchases;
+        }        
+        
+        return purchases;
+    }
+    
+    /**
      * Obtiene los elementos involucrados en cada una de las compras del negocio.
      * @param purchases Lista de compras del negocio.
      */

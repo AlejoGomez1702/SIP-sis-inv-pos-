@@ -210,22 +210,40 @@ public class Tequilazo
     {
         ArrayList<Compra> dailyPurchases = new ArrayList<>();
         GestorFecha gf = new GestorFecha();
-        gf.getDateDaily(this.ldt); 
+        gf.getDateDaily(ldt);
+        String initialDate = gf.convertDate(1); //Fecha inicial
+        GestorFecha gf2 = gf.plusDay(gf);
+        String finishDate = gf2.convertDate(0); //Fecha final
+        ArrayList<Integer> purchasesId = this.bd.getCrudCompra().
+                                    getDailyPurchases(initialDate, finishDate);
         
-        int numCom = this.compras.size();
+        int countDailySales = purchasesId.size();
         Compra auxCompra;
-        GestorFecha auxFechComp;
-        boolean ban = false;
-        for(int i = 0; i < numCom; i++) 
+        for (int i = 0; i < countDailySales; i++) 
         {
-            auxCompra = this.compras.get(i);
-            auxFechComp = new GestorFecha(auxCompra.getFechaHora());
-            ban = gf.compareDates(auxFechComp, gf);
-            if(ban)
-            {
-                dailyPurchases.add(auxCompra);
-            }                
-        }                 
+            auxCompra = this.getPurchaseFromId(purchasesId.get(i));
+            dailyPurchases.add(auxCompra);
+            //System.out.println("Compra Del dia: " + purchasesId.get(i));            
+        }
+        //System.out.println("FECHHHHHAAAAA = " + this.);
+        
+        
+//        gf.getDateDaily(this.ldt); 
+//        
+//        int numCom = this.compras.size();
+//        Compra auxCompra;
+//        GestorFecha auxFechComp;
+//        boolean ban = false;
+//        for(int i = 0; i < numCom; i++) 
+//        {
+//            auxCompra = this.compras.get(i);
+//            auxFechComp = new GestorFecha(auxCompra.getFechaHora());
+//            ban = gf.compareDates(auxFechComp, gf);
+//            if(ban)
+//            {
+//                dailyPurchases.add(auxCompra);
+//            }                
+//        }                 
         
         return dailyPurchases;
     }        
@@ -237,23 +255,46 @@ public class Tequilazo
     public ArrayList<Venta> getDailySales()
     {
         ArrayList<Venta> dailySales = new ArrayList<>();
+        //ArrayList<Compra> dailyPurchases = new ArrayList<>();
         GestorFecha gf = new GestorFecha();
-        gf.getDateDaily(this.ldt);       
+        gf.getDateDaily(ldt);
+        String initialDate = gf.convertDate(1); //Fecha inicial
+        GestorFecha gf2 = gf.plusDay(gf);
+        String finishDate = gf2.convertDate(0); //Fecha final
+        //System.out.println("Fecha inicial: " + initialDate);
+        //System.out.println("Fecha final: " + finishDate);
         
-        int numVent = this.ventas.size();
+        ArrayList<Integer> salesId = this.bd.getCrudVenta().
+                                    getDailySales(initialDate, finishDate);
+        
+        int countDailySales = salesId.size();
         Venta auxVenta;
-        GestorFecha auxFechVent;
-        boolean ban = false;
-        for(int i = 0; i < numVent; i++) 
+        for (int i = 0; i < countDailySales; i++) 
         {
-            auxVenta = this.ventas.get(i);
-            auxFechVent = new GestorFecha(auxVenta.getFechaHora());
-            ban = gf.compareDates(auxFechVent, gf);
-            if(ban)
-            {
-                dailySales.add(auxVenta);
-            }                
+            auxVenta = this.getSaleFromId(salesId.get(i));
+            dailySales.add(auxVenta);
+            //System.out.println("Venta del dia: " + salesId.get(i));            
         }
+        
+        
+        
+//        GestorFecha gf = new GestorFecha();
+//        gf.getDateDaily(this.ldt);       
+//        
+//        int numVent = this.ventas.size();
+//        Venta auxVenta;
+//        GestorFecha auxFechVent;
+//        boolean ban = false;
+//        for(int i = 0; i < numVent; i++) 
+//        {
+//            auxVenta = this.ventas.get(i);
+//            auxFechVent = new GestorFecha(auxVenta.getFechaHora());
+//            ban = gf.compareDates(auxFechVent, gf);
+//            if(ban)
+//            {
+//                dailySales.add(auxVenta);
+//            }                
+//        }
         
         return dailySales;
     }

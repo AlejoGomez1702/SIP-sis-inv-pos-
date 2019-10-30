@@ -1,7 +1,12 @@
 package principal;
 import bd.BaseDatos;
 import bd.Conexion;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import logica.gestores.Caja;
 import logica.Compra;
@@ -32,15 +37,50 @@ public class Main
         ArrayList<Categoria> cate = bd.getCrudCategorias().obtenerCategorias();
         ArrayList<Marca> marc = bd.getCrudMarcas().obtenerMarcas();  
         ArrayList<UnidadMedida> unid = bd.getCrudUnidades().obtenerUnidadesMedidas();    
-        ArrayList<Elemento> elementos = bd.getCrudElemento().getAllElements();
-        ArrayList<Compra> compras = bd.getCrudCompra().getAllPurchases();
-        ArrayList<Venta> ventas = bd.getCrudVenta().getAllSales();  
-        HashMap mapaPrel = bd.getCrudScanner().getAllMaps();
-  
+        ArrayList<Elemento> elementos = bd.getCrudElemento().getAllElements();        
+        HashMap mapaPrel = bd.getCrudScanner().getAllMaps();  
         Caja caja = new Caja();
-        Inventario inventario = new Inventario(elementos);       
-        
+        Inventario inventario = new Inventario(elementos);     
         Tequilazo tequilazo = new Tequilazo(inventario, caja, bd); 
+        
+        ///////////////////////////////////////////////////////////////////////
+        //Sacando las compras y ventas del ultimo mes.     
+        LocalDateTime fechaActual = tequilazo.getLdt();
+        Calendar calendar = Calendar.getInstance();
+        calendar.clear();
+        calendar.set(fechaActual.getYear(), fechaActual.getMonthValue()-1, 
+                                                fechaActual.getDayOfMonth());
+        
+        //calendar.add(Calendar.DATE, 1);
+        Date dateInitial = calendar.getTime();          
+        SimpleDateFormat format1 = new SimpleDateFormat("yyyy/MM/dd");          
+        String initialDate = null;
+        String finishDate = null;
+        try {
+            finishDate = format1.format(dateInitial);
+            
+            calendar.add(Calendar.DATE, -10);
+            Date dateFinish = calendar.getTime();
+            initialDate = format1.format(dateFinish);
+        }catch (Exception e1) 
+        {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+        
+        initialDate += " 00:00";
+        finishDate += " 12:00";
+        
+        System.out.println("FECHITAAA INICIAL: " +initialDate);
+        System.out.println("FECHITAAA FINAL: " +finishDate);
+        ///////////////////////////////////////////////////////////////////////
+        
+        //System.out.println("FECHA INICIAL: " + );
+        ArrayList<Compra> compras = bd.getCrudCompra().getAllPurchasesFromDates
+                                                        (initialDate, finishDate);
+        ArrayList<Venta> ventas = bd.getCrudVenta().getAllSalesFromDates
+                                                        (initialDate, finishDate);         
+        
         tequilazo.setMap(mapaPrel);
         tequilazo.setProveedores(prov);
         tequilazo.setCategorias(cate);

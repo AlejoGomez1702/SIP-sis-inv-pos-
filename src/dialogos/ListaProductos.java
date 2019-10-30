@@ -393,11 +393,15 @@ public class ListaProductos extends javax.swing.JDialog
                    cp.setVisible(true);
                    int cantidad = cp.getCantidadSeleccionada();
                    if(cantidad > 0)
-                   {
+                   {                      
                        el.setCantidadSale(cantidad);
                        this.productos.add(el);
                        JOptionPane.showMessageDialog(this, "         Se Agregaron " + cantidad + "\n           Unidades De \n" + title);
                    }   
+                   else
+                   {
+                       JOptionPane.showMessageDialog(this, "ERROR, No Existe El # De Productos En El Inventario");
+                   }
                }                    
            }
            else
