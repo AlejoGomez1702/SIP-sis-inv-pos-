@@ -155,6 +155,12 @@ public class CrudVenta
         return sales;
     }
     
+    /**
+     * Obtiene todas las ventas realizadas por el negocio en un rango de fechas.
+     * @param initialDate Fecha inicial de consulta.
+     * @param finishDate Fecha final de consulta.
+     * @return Listado de ventas, else => null.
+     */
     public ArrayList<Venta> getAllSalesFromDates(String initialDate, String finishDate)
     {
         ArrayList<Venta> sales = new ArrayList<>();
@@ -198,7 +204,54 @@ public class CrudVenta
         return sales;
     }
     
-    
+    /**
+     * 
+     * @param id
+     * @return 
+     */
+    public Venta getSaleFromId(int id)
+    {
+        ArrayList<Venta> sales = new ArrayList<>();
+        Venta venta = null;
+        String consulta = "SELECT * FROM venta WHERE id = ? ORDER BY fecha";
+        
+        //Datos de la venta.
+        Venta v;
+        Cliente cliente;
+        String fecha;
+        String obs;
+        boolean fuera;
+        double valor;
+        
+        try 
+        {
+            PreparedStatement ps = this.conexion.getConexion().prepareStatement(consulta);
+            ps.setInt(1, id);          
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next())
+            {
+                id = rs.getInt("id");
+                cliente = convertClient(rs.getString("cliente"));
+                fecha = rs.getString("fecha");
+                obs = rs.getString("observacion");
+                fuera = rs.getInt("is_fuera") == 1;
+                //System.out.println("FUERAAA: " + fuera);
+                valor = rs.getDouble("valor_total");
+                v = new Venta(id, cliente, fecha, obs, fuera, valor);
+                venta = v;
+                sales.add(v);
+                break;
+            }
+            //Obtener los elementos de la venta.
+            this.getAllElementsFromSales(sales);
+        } catch (SQLException e) 
+        {
+            return venta;
+        }
+        
+        return venta;
+    }
     
     /**
      * 

@@ -69,7 +69,7 @@ public class Main
         }
         
         initialDate += " 00:00";
-        finishDate += " 12:00";
+        finishDate += " 12:59";
         
         System.out.println("FECHITAAA INICIAL: " +initialDate);
         System.out.println("FECHITAAA FINAL: " +finishDate);

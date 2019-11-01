@@ -3,9 +3,12 @@ import dialogos.*;
 import java.awt.Color;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -164,6 +167,9 @@ public class InterfazPrincipal extends javax.swing.JFrame
         ArrayList<Compra> com = this.tequilazo.getDailyPurchases();
         this.pintor.paintTableDailyPurchases(modeloComprasDia, com);
         ArrayList<Venta> ven = this.tequilazo.getDailySales();
+        
+        //System.out.println("VENTAAASSS: " + ven.size());
+        
         this.pintor.paintTableDailySales(modeloVentasDia, ven);  
         
     }
@@ -241,13 +247,13 @@ public class InterfazPrincipal extends javax.swing.JFrame
         panelCrudBotones1 = new javax.swing.JPanel();
         btnDetalleVenta = new javax.swing.JButton();
         lblListaI2 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        fechaInicialVenta = new com.toedter.calendar.JDateChooser();
+        fechaFinalVenta = new com.toedter.calendar.JDateChooser();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jSeparator8 = new javax.swing.JSeparator();
-        jButton1 = new javax.swing.JButton();
+        btnBuscarVentas = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
@@ -1244,10 +1250,15 @@ public class InterfazPrincipal extends javax.swing.JFrame
 
         jSeparator8.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        jButton1.setBackground(new java.awt.Color(53, 144, 197));
-        jButton1.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("ACEPTAR");
+        btnBuscarVentas.setBackground(new java.awt.Color(53, 144, 197));
+        btnBuscarVentas.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
+        btnBuscarVentas.setForeground(new java.awt.Color(255, 255, 255));
+        btnBuscarVentas.setText("ACEPTAR");
+        btnBuscarVentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarVentasActionPerformed(evt);
+            }
+        });
 
         jLabel10.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
         jLabel10.setText("Últimos 10 Dias");
@@ -1262,15 +1273,15 @@ public class InterfazPrincipal extends javax.swing.JFrame
                     .addGroup(panelCrudBotones1Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(fechaInicialVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(fechaFinalVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelCrudBotones1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnBuscarVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(panelCrudBotones1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1293,12 +1304,12 @@ public class InterfazPrincipal extends javax.swing.JFrame
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(panelCrudBotones1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(jButton1))
+                            .addComponent(btnBuscarVentas))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(panelCrudBotones1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelCrudBotones1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(fechaFinalVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(fechaInicialVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel4)
                             .addComponent(jLabel9)))
                     .addGroup(panelCrudBotones1Layout.createSequentialGroup()
@@ -1484,7 +1495,7 @@ public class InterfazPrincipal extends javax.swing.JFrame
                                 .addComponent(jDateChooser4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel13)
                             .addComponent(jLabel11))))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCrudBotones2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel14)
@@ -3304,12 +3315,13 @@ public class InterfazPrincipal extends javax.swing.JFrame
             try 
             {
                 idSale = Integer.parseInt(codeSale);
+                System.out.println("EL ID DE LA VENTA ES: " + idSale);
             } catch (NumberFormatException e) 
             {
                 JOptionPane.showMessageDialog(this, "Error Con El ID De la Venta");
             }
             
-            Venta vent = this.tequilazo.getSaleFromId(idSale);
+            Venta vent = this.tequilazo.getBd().getCrudVenta().getSaleFromId(idSale);
             if(vent != null)
             {
                 DetalleVenta detVen = new DetalleVenta(this, true, vent, null);
@@ -3932,6 +3944,44 @@ public class InterfazPrincipal extends javax.swing.JFrame
         else
             JOptionPane.showMessageDialog(this, "No Selecciono Ningún Elemento");
     }//GEN-LAST:event_btnRemover2ActionPerformed
+
+    private void btnBuscarVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarVentasActionPerformed
+        String initialDate = null;
+        String finishDate = null;
+        
+        try 
+        {
+            Calendar fechaInicial = fechaInicialVenta.getCalendar();
+            Date dateInitial = fechaInicial.getTime();          
+            SimpleDateFormat format1 = new SimpleDateFormat("yyyy/MM/dd");  
+            initialDate = format1.format(dateInitial);
+            
+            Calendar fechaFinal = fechaFinalVenta.getCalendar();
+            Date dateFinal = fechaFinal.getTime();          
+            finishDate = format1.format(dateFinal);
+            
+            initialDate += " 00:00";
+            finishDate += " 12:00";
+
+        }catch (Exception e1) 
+        {
+            // TODO Auto-generated catch block
+            JOptionPane.showMessageDialog(this, "ERROR, Se Debe Seleccionar El Rango De Fechas");
+        }
+        
+        //Si se seleccionan correctamente el intervalo de fechas
+        if(initialDate != null && finishDate != null)
+        {
+            ArrayList<Venta> sales = this.tequilazo.getBd().getCrudVenta().
+                                    getAllSalesFromDates(initialDate, finishDate);
+            
+            this.pintor.paintTableSales(sales, this.modeloVentasCreadas);             
+        }
+        
+        //System.out.println("La fecha Inicial: " + initialDate);
+        //System.out.println("La fecha final: " + finishDate);
+        
+    }//GEN-LAST:event_btnBuscarVentasActionPerformed
     
     /**
      * Hace todo el proceso para agregar un proveedor al hacer click en nuevo.
@@ -3967,6 +4017,7 @@ public class InterfazPrincipal extends javax.swing.JFrame
     private javax.swing.JButton btnAgregarProdVenta;
     private javax.swing.JButton btnAgregarProductosCompra;
     private javax.swing.JButton btnAgregarUnidades;
+    private javax.swing.JButton btnBuscarVentas;
     private javax.swing.JButton btnCaja;
     private javax.swing.JButton btnCancelarCompra;
     private javax.swing.JButton btnCancelarVenta;
@@ -3994,10 +4045,9 @@ public class InterfazPrincipal extends javax.swing.JFrame
     private javax.swing.JLabel btnVerCompra;
     private javax.swing.JLabel btnVerVenta;
     private javax.swing.JComboBox<String> combProviders;
-    private javax.swing.JButton jButton1;
+    private com.toedter.calendar.JDateChooser fechaFinalVenta;
+    private com.toedter.calendar.JDateChooser fechaInicialVenta;
     private javax.swing.JButton jButton2;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
     private com.toedter.calendar.JDateChooser jDateChooser3;
     private com.toedter.calendar.JDateChooser jDateChooser4;
     private javax.swing.JLabel jLabel1;

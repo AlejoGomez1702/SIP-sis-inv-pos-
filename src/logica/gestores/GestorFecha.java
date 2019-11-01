@@ -133,12 +133,12 @@ public class GestorFecha
         el sistema entre las 12 y 6 de la mañana se muestre
         el registro de las ventas del dia anterior.
         */
-        int horaEntra = ldt.getHour();
+        //int horaEntra = ldt.getHour();
         //System.out.println("HORRAA: " + horaEntra);
-        if(horaEntra >= 0 && horaEntra <= 6)
-        {
-            ldt.minusDays(1);
-        }         
+//        if(horaEntra >= 0 && horaEntra <= 6)
+//        {
+//            ldt.minusDays(1);
+//        }         
                 
         //AÑO
         int yearLdt = ldt.getYear();

@@ -268,17 +268,25 @@ public class PintorTablas
      */
     public void paintTableDailySales(DefaultTableModel modelTable, ArrayList<Venta> sales)
     {
-        this.clearDataFromTable(modelTable);
-        int numSal = sales.size();
-        //System.out.println("EL TAMAÑO DE VENTAS ES: " + numSal);
-        Venta venta;          
-        for (int i = 0; i < numSal; i++)
+        try {
+            this.clearDataFromTable(modelTable);
+            int numSal = sales.size();
+            Venta venta;          
+            for (int i = 0; i < numSal; i++)
+            {
+                venta = sales.get(i);
+
+
+                String [] fila ={venta.getId()+"", venta.getCliente().getNombre(),
+                                                            (int)venta.getValor()+""};
+                modelTable.addRow(fila);
+            }
+        } catch (Exception e) 
         {
-            venta = sales.get(i);
-            String [] fila ={venta.getId()+"", venta.getCliente().getNombre(),
-                                                        (int)venta.getValor()+""};
-            modelTable.addRow(fila);
+            System.out.println(e.getMessage() + " : MENSAJE");
         }
+            //System.out.println(e.getM);
+        
     }    
     
     /**
