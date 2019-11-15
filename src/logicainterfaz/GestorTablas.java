@@ -194,7 +194,7 @@ public class GestorTablas
             mt.addColumn("NOMBRE");
             mt.addColumn("MARCA");
             mt.addColumn("MEDIDA");
-            mt.addColumn("PRECIO COMPRA");
+            mt.addColumn("PRECIO");
             mt.addColumn("CANTIDAD ACTUAL");
         }          
         t.setModel(mt);
@@ -443,7 +443,7 @@ public class GestorTablas
         
         TableRowSorter<DefaultTableModel> trsfiltro = new TableRowSorter(modelo);
         tabla.setRowSorter(trsfiltro); 
-        trsfiltro.setRowFilter(RowFilter.regexFilter(filtro, campo));               
+        trsfiltro.setRowFilter(RowFilter.regexFilter("(?i)" + filtro));               
     }   
         
     
