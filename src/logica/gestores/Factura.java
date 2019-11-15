@@ -145,7 +145,8 @@ public class Factura implements Printable
         
         //****ENCABEZADO****ENCABEZADO****ENCABEZADO****ENCABEZADO*****//
         g2d.drawString("--------------------------",x,y);y+=yShift;
-        g2d.drawString(" Bar & Licores TEQUILAZO  ",x,y);y+=yShift;
+        g2d.drawString(" Avicola y Salsamentaria  ",x,y);y+=yShift;
+        g2d.drawString("        Pensilvania       ",x,y);y+=yShift;
         g2d.drawString("   " +     fecha   + "    ",x,y);y+=yShift;
         //Validación de los datos del cliente ==> nombre, cedula, telefono.    
         if(nameClient.length() > 0)
@@ -174,7 +175,7 @@ public class Factura implements Printable
         
         //****PIE****PIE****PIE****PIE****PIE****PIE****PIE****PIE****PIE***//
         g2d.drawString("   Teléfono De Contacto   ",x,y);y+=yShift;
-        g2d.drawString("       3106366850         ",x,y);y+=yShift;
+        g2d.drawString("       3213332170         ",x,y);y+=yShift;
         g2d.drawString("**************************",x,y);y+=yShift;
         g2d.drawString("  GRACIAS POR VISITARNOS  ",x,y);y+=yShift;
         g2d.drawString("**************************",x,y);y+=yShift;

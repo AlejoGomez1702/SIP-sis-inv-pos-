@@ -214,6 +214,8 @@ public class Tequilazo
         String initialDate = gf.convertDate(1); //Fecha inicial
         GestorFecha gf2 = gf.plusDay(gf);
         String finishDate = gf2.convertDate(0); //Fecha final
+        System.out.println("Ventas ini: " + initialDate);
+        System.out.println("Ventas fin: " + finishDate);
         ArrayList<Integer> purchasesId = this.bd.getCrudCompra().
                                     getDailyPurchases(initialDate, finishDate);
         

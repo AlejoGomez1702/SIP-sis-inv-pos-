@@ -201,13 +201,19 @@ public class GestorFecha
         return loc;        
     }
     
+    /**
+     * Realiza la conversion de GestorFecha => String.
+     * @param indicador 1=>Fecha inicial.else fecha final.
+     * @return 
+     */
     public String convertDate(int indicador)
     {
         String fecha = "";
-        if(indicador == 1)
+        
+        if(indicador == 1) //Fecha inicial
             fecha = year + "/" + month + "/" + day + " " + "00" + ":" + minute;  
-        else
-            fecha = year + "/" + month + "/" + day + " " + hour + ":" + minute;
+        else //Fecha final
+            fecha = year + "/" + month + "/" + day + " " + "12" + ":" + "59";
         return fecha;
     }
         
