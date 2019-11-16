@@ -322,11 +322,15 @@ public class PintorTablas
         for(String key : map.keySet()) 
         {
             el = map.get(key);
-            desc = el.getProducto().getNombre() + " " + el.getMarca() + " X " + 
+            if(el != null)
+            {
+                desc = el.getProducto().getNombre() + " " + el.getMarca() + " X " + 
                     el.getUnidadMedida();
-            String [] fila ={el.getCodigo()+"", key, desc};
-                                                        
-            modelTable.addRow(fila);                        
+                String [] fila ={el.getCodigo()+"", key, desc};
+
+                modelTable.addRow(fila);  
+            }
+            //System.out.println("ELLLLLL = " + el);                                  
         }
     }
     
