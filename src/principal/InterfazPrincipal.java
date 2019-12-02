@@ -2058,8 +2058,14 @@ public class InterfazPrincipal extends javax.swing.JFrame
             }
         });
         txtCode.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCodeKeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtCodeKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCodeKeyTyped(evt);
             }
         });
 
@@ -4035,17 +4041,52 @@ public class InterfazPrincipal extends javax.swing.JFrame
     }//GEN-LAST:event_txtCodeMouseReleased
 
     private void txtCodeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodeKeyReleased
-        String code = this.txtCode.getText();
-        if(code.length() == 5)
+        String code = this.txtCode.getText().toLowerCase();
+        if(code.length() > 12)
         {
-            this.ventaController.addProduct(code);
-            this.txtCode.setText("");
+            Elemento el = (Elemento) this.tequilazo.getMap().get(code);
+            if(el != null)
+            {
+                System.out.println("EL CÓDIIGOOOO ESSS: "+ el.getCodigo());
+                this.ventaController.addProduct(el.getCodigo());
+                this.txtCode.setText("");
+            }            
         }
         
         this.componentesNuevos = this.ventaController.getElementsSale();
         this.pintor.paintTableSumarySale(this.modeloResumenVenta, 
                 this.componentesNuevos, this.txtTotalResumenVenta, false);            
     }//GEN-LAST:event_txtCodeKeyReleased
+
+    private void txtCodeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodeKeyTyped
+//        String code = this.txtCode.getText();
+//        if(code.length() == 14)
+//        {
+//            Elemento el = (Elemento) this.tequilazo.getMap().get(code);
+//            System.out.println("EL CÓDIIGOOOO ESSS: "+ el.getCodigo());
+//            this.ventaController.addProduct(el.getCodigo());
+//            this.txtCode.setText("");
+//        }
+//        
+//        this.componentesNuevos = this.ventaController.getElementsSale();
+//        this.pintor.paintTableSumarySale(this.modeloResumenVenta, 
+//                this.componentesNuevos, this.txtTotalResumenVenta, false);  
+    }//GEN-LAST:event_txtCodeKeyTyped
+
+    private void txtCodeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodeKeyPressed
+        String code = this.txtCode.getText();
+        if(code.length() == 14)
+        {
+            Elemento el = (Elemento) this.tequilazo.getMap().get(code);
+            System.out.println("EL CÓDIIGOOOO ESSS: "+ el.getCodigo());
+            this.ventaController.addProduct(el.getCodigo());
+            this.txtCode.setText("");
+        }
+        
+        this.componentesNuevos = this.ventaController.getElementsSale();
+        this.pintor.paintTableSumarySale(this.modeloResumenVenta, 
+                this.componentesNuevos, this.txtTotalResumenVenta, false);
+    }//GEN-LAST:event_txtCodeKeyPressed
     
     /**
      * Hace todo el proceso para agregar un proveedor al hacer click en nuevo.
