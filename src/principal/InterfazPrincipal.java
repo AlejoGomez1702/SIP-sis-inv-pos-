@@ -259,11 +259,17 @@ public class InterfazPrincipal extends javax.swing.JFrame
         jPanel8 = new javax.swing.JPanel();
         jScrollPane10 = new javax.swing.JScrollPane();
         tablaComprasHechas = new javax.swing.JTable();
-        btnCrear4 = new javax.swing.JButton();
-        lblIconoProductos4 = new javax.swing.JLabel();
         panelCrudBotones2 = new javax.swing.JPanel();
         btnDetalleCompra = new javax.swing.JButton();
         lblListaI5 = new javax.swing.JLabel();
+        lblListaI9 = new javax.swing.JLabel();
+        jSeparator9 = new javax.swing.JSeparator();
+        jButton2 = new javax.swing.JButton();
+        jDateChooser3 = new com.toedter.calendar.JDateChooser();
+        jLabel9 = new javax.swing.JLabel();
+        jDateChooser4 = new com.toedter.calendar.JDateChooser();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
         panelProveedores = new javax.swing.JPanel();
         jSeparator6 = new javax.swing.JSeparator();
         jPanel13 = new javax.swing.JPanel();
@@ -1274,8 +1280,8 @@ public class InterfazPrincipal extends javax.swing.JFrame
                     .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
                 .addGap(22, 22, 22)
-                .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
                 .addGroup(panelCrudBotones1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCrudBotones1Layout.createSequentialGroup()
                         .addComponent(lblListaI2, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1379,43 +1385,21 @@ public class InterfazPrincipal extends javax.swing.JFrame
         ));
         jScrollPane10.setViewportView(tablaComprasHechas);
 
-        btnCrear4.setBackground(new java.awt.Color(64, 154, 102));
-        btnCrear4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnCrear4.setText("Imprimir Lista");
-        btnCrear4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnCrear4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCrear4ActionPerformed(evt);
-            }
-        });
-
-        lblIconoProductos4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/compra.png"))); // NOI18N
-
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap(35, Short.MAX_VALUE)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                        .addComponent(btnCrear4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblIconoProductos4)
-                        .addGap(336, 336, 336))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                        .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 818, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27))))
+                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 818, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                .addContainerGap(21, Short.MAX_VALUE)
                 .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblIconoProductos4)
-                    .addComponent(btnCrear4))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         btnDetalleCompra.setBackground(new java.awt.Color(53, 144, 197));
@@ -1433,25 +1417,83 @@ public class InterfazPrincipal extends javax.swing.JFrame
         lblListaI5.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lblListaI5.setText("Listado De Compras");
 
+        lblListaI9.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
+        lblListaI9.setText("Últimos 10 Dias");
+
+        jSeparator9.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        jButton2.setBackground(new java.awt.Color(53, 144, 197));
+        jButton2.setText("ACEPTAR");
+
+        jLabel9.setFont(new java.awt.Font("Cambria", 0, 12)); // NOI18N
+        jLabel9.setText("Final:");
+
+        jLabel10.setFont(new java.awt.Font("Cambria", 0, 12)); // NOI18N
+        jLabel10.setText("Inicial:");
+
+        jLabel11.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
+        jLabel11.setText("Buscar Por Fecha:");
+
         javax.swing.GroupLayout panelCrudBotones2Layout = new javax.swing.GroupLayout(panelCrudBotones2);
         panelCrudBotones2.setLayout(panelCrudBotones2Layout);
         panelCrudBotones2Layout.setHorizontalGroup(
             panelCrudBotones2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelCrudBotones2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblListaI5)
-                .addGap(203, 203, 203)
+                .addGap(57, 57, 57)
+                .addGroup(panelCrudBotones2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelCrudBotones2Layout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jDateChooser4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel9))
+                    .addGroup(panelCrudBotones2Layout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelCrudBotones2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2))
+                .addGap(22, 22, 22)
+                .addComponent(jSeparator9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelCrudBotones2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelCrudBotones2Layout.createSequentialGroup()
+                        .addGap(84, 84, 84)
+                        .addComponent(lblListaI5)
+                        .addGap(46, 46, 46))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCrudBotones2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblListaI9)
+                        .addGap(116, 116, 116)))
                 .addComponent(btnDetalleCompra)
-                .addGap(29, 29, 29))
+                .addGap(31, 31, 31))
         );
         panelCrudBotones2Layout.setVerticalGroup(
             panelCrudBotones2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelCrudBotones2Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(btnDetalleCompra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(panelCrudBotones2Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCrudBotones2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblListaI5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnDetalleCompra)
+                .addGap(24, 24, 24))
+            .addComponent(jSeparator9)
+            .addGroup(panelCrudBotones2Layout.createSequentialGroup()
+                .addGroup(panelCrudBotones2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelCrudBotones2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblListaI5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblListaI9))
+                    .addGroup(panelCrudBotones2Layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addGroup(panelCrudBotones2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel11)
+                            .addComponent(jButton2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelCrudBotones2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel9)
+                            .addComponent(jDateChooser4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout panelComprasLayout = new javax.swing.GroupLayout(panelCompras);
@@ -1465,8 +1507,8 @@ public class InterfazPrincipal extends javax.swing.JFrame
         panelComprasLayout.setVerticalGroup(
             panelComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelComprasLayout.createSequentialGroup()
-                .addComponent(panelCrudBotones2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(8, 8, 8)
+                .addComponent(panelCrudBotones2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -3316,10 +3358,6 @@ public class InterfazPrincipal extends javax.swing.JFrame
             JOptionPane.showMessageDialog(this, "No Se Seleccionó Ningún Elemento");
     }//GEN-LAST:event_btnDetalleVentaActionPerformed
 
-    private void btnCrear4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrear4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnCrear4ActionPerformed
-
     private void btnDetalleCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalleCompraActionPerformed
         String codePurchase = this.gt.getCodeElementFromTable(this.tablaComprasHechas);
         if(codePurchase != null)
@@ -3980,7 +4018,6 @@ public class InterfazPrincipal extends javax.swing.JFrame
     private javax.swing.JButton btnCaja;
     private javax.swing.JButton btnCancelarCompra;
     private javax.swing.JButton btnCancelarVenta;
-    private javax.swing.JButton btnCrear4;
     private javax.swing.JButton btnCrearCompra;
     private javax.swing.JButton btnCrearVenta;
     private javax.swing.JButton btnDetalleCompra;
@@ -4009,9 +4046,14 @@ public class InterfazPrincipal extends javax.swing.JFrame
     private javax.swing.JCheckBox checFuera;
     private javax.swing.JComboBox<String> combProviders;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
+    private com.toedter.calendar.JDateChooser jDateChooser3;
+    private com.toedter.calendar.JDateChooser jDateChooser4;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -4019,6 +4061,7 @@ public class InterfazPrincipal extends javax.swing.JFrame
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
@@ -4051,6 +4094,7 @@ public class InterfazPrincipal extends javax.swing.JFrame
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
+    private javax.swing.JSeparator jSeparator9;
     private javax.swing.JLabel lblCategorias;
     private javax.swing.JLabel lblFecha;
     private javax.swing.JLabel lblFecha2;
@@ -4059,7 +4103,6 @@ public class InterfazPrincipal extends javax.swing.JFrame
     private javax.swing.JLabel lblIconoProductos;
     private javax.swing.JLabel lblIconoProductos1;
     private javax.swing.JLabel lblIconoProductos2;
-    private javax.swing.JLabel lblIconoProductos4;
     private javax.swing.JLabel lblIconoProductos5;
     private javax.swing.JLabel lblIngreso;
     private javax.swing.JLabel lblIngreso1;
@@ -4072,6 +4115,7 @@ public class InterfazPrincipal extends javax.swing.JFrame
     private javax.swing.JLabel lblListaI6;
     private javax.swing.JLabel lblListaI7;
     private javax.swing.JLabel lblListaI8;
+    private javax.swing.JLabel lblListaI9;
     private javax.swing.JLabel lblLupa;
     private javax.swing.JLabel lblMarcas;
     private javax.swing.JLabel lblNumero;
