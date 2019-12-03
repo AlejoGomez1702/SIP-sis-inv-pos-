@@ -3,8 +3,11 @@ package logica;
 import logica.gestores.Caja;
 import logica.gestores.Reporte;
 import bd.BaseDatos;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import logica.bd.*;
 import logica.gestores.GestorFecha;
@@ -249,6 +252,41 @@ public class Tequilazo
         
         return dailyPurchases;
     }        
+    
+    public String[] getDatesFromOperations()
+    {
+        String[] fechas = new String[2];
+        //Sacando las compras y ventas del ultimo mes.     
+        LocalDateTime fechaActual = this.getLdt();
+        Calendar calendar = Calendar.getInstance();
+        calendar.clear();
+        calendar.set(fechaActual.getYear(), fechaActual.getMonthValue()-1, 
+                                                fechaActual.getDayOfMonth());
+        
+        //calendar.add(Calendar.DATE, 1);
+        Date dateInitial = calendar.getTime();          
+        SimpleDateFormat format1 = new SimpleDateFormat("yyyy/MM/dd");          
+        String initialDate = null;
+        String finishDate = null;
+        try {
+            finishDate = format1.format(dateInitial);
+            
+            calendar.add(Calendar.DATE, -10);
+            Date dateFinish = calendar.getTime();
+            initialDate = format1.format(dateFinish);
+        }catch (Exception e1) 
+        {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+        
+        fechas[0] = initialDate;
+        fechas[1] = finishDate;
+        //initialDate += " 00:00";
+        //finishDate += " 12:59";
+        return fechas;
+    }
+    
     
     /**
      * Obtiene el listado de ventas diarias que se realizan en el negocio.

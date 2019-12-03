@@ -42,37 +42,9 @@ public class Main
         Inventario inventario = new Inventario(elementos);     
         Tequilazo tequilazo = new Tequilazo(inventario, caja, bd); 
         
-        ///////////////////////////////////////////////////////////////////////
-        //Sacando las compras y ventas del ultimo mes.     
-        LocalDateTime fechaActual = tequilazo.getLdt();
-        Calendar calendar = Calendar.getInstance();
-        calendar.clear();
-        calendar.set(fechaActual.getYear(), fechaActual.getMonthValue()-1, 
-                                                fechaActual.getDayOfMonth());
-        
-        //calendar.add(Calendar.DATE, 1);
-        Date dateInitial = calendar.getTime();          
-        SimpleDateFormat format1 = new SimpleDateFormat("yyyy/MM/dd");          
-        String initialDate = null;
-        String finishDate = null;
-        try {
-            finishDate = format1.format(dateInitial);
-            
-            calendar.add(Calendar.DATE, -10);
-            Date dateFinish = calendar.getTime();
-            initialDate = format1.format(dateFinish);
-        }catch (Exception e1) 
-        {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
-        }
-        
-        initialDate += " 00:00";
-        finishDate += " 12:59";
-        
-        System.out.println("FECHITAAA INICIAL: " +initialDate);
-        System.out.println("FECHITAAA FINAL: " +finishDate);
-        ///////////////////////////////////////////////////////////////////////
+        String[] fechas = tequilazo.getDatesFromOperations();
+        String initialDate = fechas[0];
+        String finishDate = fechas[1];
         
         //System.out.println("FECHA INICIAL: " + );
         ArrayList<Compra> compras = bd.getCrudCompra().getAllPurchasesFromDates
