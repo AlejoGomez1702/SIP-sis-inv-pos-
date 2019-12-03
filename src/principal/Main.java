@@ -1,7 +1,11 @@
 package principal;
 import bd.BaseDatos;
 import bd.Conexion;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import logica.gestores.Caja;
 import logica.Compra;
@@ -32,15 +36,21 @@ public class Main
         ArrayList<Categoria> cate = bd.getCrudCategorias().obtenerCategorias();
         ArrayList<Marca> marc = bd.getCrudMarcas().obtenerMarcas();  
         ArrayList<UnidadMedida> unid = bd.getCrudUnidades().obtenerUnidadesMedidas();    
-        ArrayList<Elemento> elementos = bd.getCrudElemento().getAllElements();
-        ArrayList<Compra> compras = bd.getCrudCompra().getAllPurchases();
-        ArrayList<Venta> ventas = bd.getCrudVenta().getAllSales();  
+        ArrayList<Elemento> elementos = bd.getCrudElemento().getAllElements();         
         HashMap mapaPrel = bd.getCrudScanner().getAllMaps();
   
         Caja caja = new Caja();
-        Inventario inventario = new Inventario(elementos);       
-        
+        Inventario inventario = new Inventario(elementos);    
         Tequilazo tequilazo = new Tequilazo(inventario, caja, bd); 
+        
+                
+        System.out.println("FECHITAAA INICIAL: " +initialDate);
+        System.out.println("FECHITAAA FINAL: " +finishDate);
+        
+        ArrayList<Compra> compras = bd.getCrudCompra().getAllPurchases();
+        ArrayList<Venta> ventas = bd.getCrudVenta().getAllSales(); 
+        
+        
         tequilazo.setMap(mapaPrel);
         tequilazo.setProveedores(prov);
         tequilazo.setCategorias(cate);
