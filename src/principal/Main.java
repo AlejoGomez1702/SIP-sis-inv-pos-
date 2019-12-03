@@ -47,7 +47,7 @@ public class Main
         //System.out.println("FECHITAAA INICIAL: " +initialDate);
         //System.out.println("FECHITAAA FINAL: " +finishDate);
         
-        ArrayList<Compra> compras = bd.getCrudCompra().getAllPurchases();
+        ArrayList<Compra> compras = bd.getCrudCompra().getAllPurchasesFromDates(fechas[0], fechas[1]);
         ArrayList<Venta> ventas = bd.getCrudVenta().getAllSalesFromDates(fechas[0], fechas[1]); 
         
         
