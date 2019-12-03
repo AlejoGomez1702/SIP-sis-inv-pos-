@@ -42,13 +42,13 @@ public class Main
         Caja caja = new Caja();
         Inventario inventario = new Inventario(elementos);    
         Tequilazo tequilazo = new Tequilazo(inventario, caja, bd); 
-        
+        String[] fechas = tequilazo.getDatesFromOperations();
                 
-        System.out.println("FECHITAAA INICIAL: " +initialDate);
-        System.out.println("FECHITAAA FINAL: " +finishDate);
+        //System.out.println("FECHITAAA INICIAL: " +initialDate);
+        //System.out.println("FECHITAAA FINAL: " +finishDate);
         
         ArrayList<Compra> compras = bd.getCrudCompra().getAllPurchases();
-        ArrayList<Venta> ventas = bd.getCrudVenta().getAllSales(); 
+        ArrayList<Venta> ventas = bd.getCrudVenta().getAllSalesFromDates(fechas[0], fechas[1]); 
         
         
         tequilazo.setMap(mapaPrel);
