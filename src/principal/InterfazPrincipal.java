@@ -4,9 +4,12 @@ import dialogos.*;
 import java.awt.Color;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -247,9 +250,9 @@ public class InterfazPrincipal extends javax.swing.JFrame
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        btnBuscarVentas = new javax.swing.JButton();
+        fechaInicialVenta = new com.toedter.calendar.JDateChooser();
+        fechaFinalVenta = new com.toedter.calendar.JDateChooser();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
         tablaVentasCreadas = new javax.swing.JTable();
@@ -1256,8 +1259,13 @@ public class InterfazPrincipal extends javax.swing.JFrame
         jLabel4.setFont(new java.awt.Font("Cambria", 0, 12)); // NOI18N
         jLabel4.setText("Final:");
 
-        jButton1.setBackground(new java.awt.Color(53, 144, 197));
-        jButton1.setText("ACEPTAR");
+        btnBuscarVentas.setBackground(new java.awt.Color(53, 144, 197));
+        btnBuscarVentas.setText("ACEPTAR");
+        btnBuscarVentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarVentasActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelCrudBotones1Layout = new javax.swing.GroupLayout(panelCrudBotones1);
         panelCrudBotones1.setLayout(panelCrudBotones1Layout);
@@ -1269,7 +1277,7 @@ public class InterfazPrincipal extends javax.swing.JFrame
                     .addGroup(panelCrudBotones1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(fechaInicialVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel4))
                     .addGroup(panelCrudBotones1Layout.createSequentialGroup()
@@ -1277,8 +1285,8 @@ public class InterfazPrincipal extends javax.swing.JFrame
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelCrudBotones1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(fechaFinalVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscarVentas))
                 .addGap(22, 22, 22)
                 .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
@@ -1309,13 +1317,14 @@ public class InterfazPrincipal extends javax.swing.JFrame
                         .addGap(17, 17, 17)
                         .addGroup(panelCrudBotones1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(jButton1))
+                            .addComponent(btnBuscarVentas))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panelCrudBotones1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(panelCrudBotones1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(fechaInicialVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(fechaFinalVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(panelCrudBotones1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel4)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1488,11 +1497,12 @@ public class InterfazPrincipal extends javax.swing.JFrame
                             .addComponent(jLabel11)
                             .addComponent(jButton2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panelCrudBotones2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel9)
+                        .addGroup(panelCrudBotones2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jDateChooser4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(panelCrudBotones2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel10)
+                                .addComponent(jLabel9)))))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
@@ -3980,6 +3990,40 @@ public class InterfazPrincipal extends javax.swing.JFrame
         else
             JOptionPane.showMessageDialog(this, "No Selecciono Ningún Elemento");
     }//GEN-LAST:event_btnMicheladaActionPerformed
+
+    private void btnBuscarVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarVentasActionPerformed
+        String initialDate = null;
+        String finishDate = null;
+        
+        try 
+        {
+            Calendar fechaInicial = fechaInicialVenta.getCalendar();
+            Date dateInitial = fechaInicial.getTime();          
+            SimpleDateFormat format1 = new SimpleDateFormat("yyyy/MM/dd");  
+            initialDate = format1.format(dateInitial);
+            
+            Calendar fechaFinal = fechaFinalVenta.getCalendar();
+            Date dateFinal = fechaFinal.getTime();          
+            finishDate = format1.format(dateFinal);
+            
+            initialDate += " 00:00";
+            finishDate += " 12:00";
+
+        }catch (Exception e1) 
+        {
+            // TODO Auto-generated catch block
+            JOptionPane.showMessageDialog(this, "ERROR, Se Debe Seleccionar El Rango De Fechas");
+        }
+        
+        //Si se seleccionan correctamente el intervalo de fechas
+        if(initialDate != null && finishDate != null)
+        {
+            ArrayList<Venta> sales = this.tequilazo.getBd().getCrudVenta().
+                                    getAllSalesFromDates(initialDate, finishDate);
+            
+            this.pintor.paintTableSales(sales, this.modeloVentasCreadas);             
+        }
+    }//GEN-LAST:event_btnBuscarVentasActionPerformed
     
     /**
      * Hace todo el proceso para agregar un proveedor al hacer click en nuevo.
@@ -4015,6 +4059,7 @@ public class InterfazPrincipal extends javax.swing.JFrame
     private javax.swing.JButton btnAgregarProdVenta;
     private javax.swing.JButton btnAgregarProductosCompra;
     private javax.swing.JButton btnAgregarUnidades;
+    private javax.swing.JButton btnBuscarVentas;
     private javax.swing.JButton btnCaja;
     private javax.swing.JButton btnCancelarCompra;
     private javax.swing.JButton btnCancelarVenta;
@@ -4045,10 +4090,9 @@ public class InterfazPrincipal extends javax.swing.JFrame
     private javax.swing.JCheckBox checDentro;
     private javax.swing.JCheckBox checFuera;
     private javax.swing.JComboBox<String> combProviders;
-    private javax.swing.JButton jButton1;
+    private com.toedter.calendar.JDateChooser fechaFinalVenta;
+    private com.toedter.calendar.JDateChooser fechaInicialVenta;
     private javax.swing.JButton jButton2;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
     private com.toedter.calendar.JDateChooser jDateChooser3;
     private com.toedter.calendar.JDateChooser jDateChooser4;
     private javax.swing.JLabel jLabel1;

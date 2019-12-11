@@ -79,7 +79,7 @@ public class Tequilazo
     /**
      * Valor adicional que se le aumenta por estar michelado.
      */
-    private final double VALOR_MICHELADA = 700;
+    private final double VALOR_MICHELADA = 800;
     
     /**
      * Listado de unidades de medida que se comercializan en el negocio.

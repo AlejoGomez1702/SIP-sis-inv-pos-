@@ -1,9 +1,10 @@
+
 package logica;
 import java.util.ArrayList;
 
 /**
- *
- * @author ever
+ * Represneta una venta del negocio.
+ * @author Luis Alejandro Gomez Castaño.
  */
 public class Venta
 {
@@ -14,6 +15,10 @@ public class Venta
     private boolean Fuera;
     private double valor;
     private ArrayList<Elemento> elementos;    
+    
+    //Sirve para sacar los informes adicionales de contabilidad en el tequilazo.
+    private double valorInvertido;
+    private double utilidad;
 
     public Venta(int id, Cliente cliente, String fechaHora, String observacion, 
                     boolean fuera, double valor) 
@@ -24,56 +29,91 @@ public class Venta
         this.observacion = observacion;
         this.Fuera = fuera;
         this.valor = valor;
+        this.valorInvertido = 0.0;
+        this.utilidad = 0.0;
     }
 
-    public int getId() {
+    public int getId() 
+    {
         return id;
     }
 
-    public void setId(int id) {
+    public double getValorInvertido() {
+        return valorInvertido;
+    }
+
+    public double getUtilidad() {
+        return utilidad;
+    }
+    
+    
+
+    public void setId(int id) 
+    {
         this.id = id;
     }
 
-    public String getFechaHora() {
+    public String getFechaHora() 
+    {
         return fechaHora;
     }
 
-    public boolean isFuera() {
+    public boolean isFuera() 
+    {
         return Fuera;
     }
     
-    
-    
-//
-//    public void agregarComponente(Elemento componente)
-//    {
-//        componentes.add(componente);
-//    }
-    public ArrayList<Elemento> getElementos() {
+    public ArrayList<Elemento> getElementos() 
+    {
         return this.elementos;
     }
 
-    public void setElementos(ArrayList<Elemento> componentes) {
-        this.elementos = componentes;
+    public void setElementos(ArrayList<Elemento> elements) 
+    {
+        this.elementos = elements;
+        int numElements = this.elementos.size();
+        Elemento e;
+        
+        //información de utilidad y valor invertido.
+        double invertido = 0;
+        double utilidadGanada = 0;
+        
+        for(int i = 0; i < numElements; i++) 
+        {            
+            e = elements.get(i);
+            System.out.println("Elemento " + e.getProducto().getNombre() + " Cantidad: " + e.getCantidadSale());
+            invertido += e.getPrecioCompra() * e.getCantidadSale();            
+        }
+        
+       
+        this.utilidad = this.valor - invertido;
+        this.valorInvertido = invertido;
+        System.out.println("utilidad: " + utilidad + " invertido: " + valorInvertido);
+        
     }
 
-    public String getObservacion() {
+    public String getObservacion() 
+    {
         return observacion;
     }
 
-    public Cliente getCliente() {
+    public Cliente getCliente() 
+    {
         return cliente;
     }
 
-    public void setCliente(Cliente cliente) {
+    public void setCliente(Cliente cliente) 
+    {
         this.cliente = cliente;
     }
 
-    public void setObservacion(String observacion) {
+    public void setObservacion(String observacion) 
+    {
         this.observacion = observacion;
     }
 
-    public double getValor() {
+    public double getValor() 
+    {
         return valor;
     }
     

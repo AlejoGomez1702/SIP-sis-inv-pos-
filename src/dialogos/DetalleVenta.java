@@ -131,6 +131,16 @@ public class DetalleVenta extends javax.swing.JDialog
         boolean fuera = venta.isFuera();
         this.checFuera.setSelected(fuera);
         this.checDentro.setSelected(!fuera);
+        //Muestra los reportes contables
+        String inv = "";
+        String gan = "";
+        try {            
+            inv = (int) venta.getValorInvertido() + "";
+            gan = (int) venta.getUtilidad() + "";
+        } catch (Exception e) {
+        }
+        this.txtInvertido.setText(inv);
+        this.txtUtilidad.setText(gan);
        
         int a = modeloDetalleVenta.getRowCount()-1;
         for(int i=a; i>=0; i--)        
@@ -183,6 +193,10 @@ public class DetalleVenta extends javax.swing.JDialog
         checFuera = new javax.swing.JCheckBox();
         jLabel5 = new javax.swing.JLabel();
         txtTotal = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        txtUtilidad = new javax.swing.JLabel();
+        txtInvertido = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -269,6 +283,18 @@ public class DetalleVenta extends javax.swing.JDialog
         txtTotal.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         txtTotal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        jLabel6.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
+        jLabel6.setText("UTILIDAD:");
+
+        txtUtilidad.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
+        txtUtilidad.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        txtInvertido.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
+        txtInvertido.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel7.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
+        jLabel7.setText("INVERTIDO:");
+
         javax.swing.GroupLayout panelContenidoLayout = new javax.swing.GroupLayout(panelContenido);
         panelContenido.setLayout(panelContenidoLayout);
         panelContenidoLayout.setHorizontalGroup(
@@ -283,7 +309,7 @@ public class DetalleVenta extends javax.swing.JDialog
                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelContenidoLayout.createSequentialGroup()
-                .addContainerGap(139, Short.MAX_VALUE)
+                .addContainerGap(108, Short.MAX_VALUE)
                 .addGroup(panelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelContenidoLayout.createSequentialGroup()
                         .addComponent(checDentro)
@@ -299,6 +325,14 @@ public class DetalleVenta extends javax.swing.JDialog
                             .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(100, 100, 100))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelContenidoLayout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtUtilidad, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(55, 55, 55)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtInvertido, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(46, 46, 46)
                         .addComponent(jLabel5)
                         .addGap(18, 18, 18)
                         .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -327,9 +361,15 @@ public class DetalleVenta extends javax.swing.JDialog
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(panelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel5))
+                .addGroup(panelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txtTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel5))
+                    .addGroup(panelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel6)
+                        .addComponent(txtUtilidad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel7)
+                    .addComponent(txtInvertido, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(14, 14, 14)
                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -345,7 +385,7 @@ public class DetalleVenta extends javax.swing.JDialog
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(panelContenido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 11, Short.MAX_VALUE))
         );
 
         pack();
@@ -366,6 +406,8 @@ public class DetalleVenta extends javax.swing.JDialog
     private javax.swing.JCheckBox checFuera;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel panelContenido;
     private javax.swing.JPanel panelEncabezado;
@@ -373,8 +415,10 @@ public class DetalleVenta extends javax.swing.JDialog
     private javax.swing.JLabel txtEcabezado;
     private javax.swing.JLabel txtFecha;
     private javax.swing.JLabel txtId;
+    private javax.swing.JLabel txtInvertido;
     private javax.swing.JLabel txtSalir;
     private javax.swing.JLabel txtTitleId;
     private javax.swing.JLabel txtTotal;
+    private javax.swing.JLabel txtUtilidad;
     // End of variables declaration//GEN-END:variables
 }
