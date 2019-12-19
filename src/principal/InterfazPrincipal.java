@@ -1,5 +1,4 @@
 package principal;
-import controladores.VentaController;
 import dialogos.*;
 import java.awt.Color;
 import java.awt.print.PrinterException;
@@ -148,7 +147,10 @@ public class InterfazPrincipal extends javax.swing.JFrame
                      
     }
     
-    public void initInformation()
+    /**
+     * Inicializa la información de las tablas del sistema.
+     */
+    private void initInformation()
     {
         setIconImage(new ImageIcon(getClass().getResource("/imagenes/iconoPrincipal.png")).getImage());
         //Inicialización de tablas.
@@ -2848,85 +2850,87 @@ public class InterfazPrincipal extends javax.swing.JFrame
 
     private void btnModificarComponenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarComponenteActionPerformed
         String codeElement = this.gt.getCodeElementFromTable(this.tablaInventario);
+        int control = this.logica.productController.updateProduct(codeElement);
+        System.out.println("El control dice: " + control);
         //System.out.println("El Código leido es: " + codeElement);
-        if(codeElement == null)
-            JOptionPane.showMessageDialog(this, "No Seleccionó Ningún Elemento");
-        else
-        {
-            String pass = "pensilvania";
-            String passInput = JOptionPane.showInputDialog(this, "Ingrese La Contraseña: ");
-            if(pass.equals(passInput))
-            {
-                Elemento el = this.tequilazo.getBd().getCrudElemento().getElementFromCode(codeElement);
-                if(el != null)
-                {
-                    //Inicio el dialogo con los datos de "el".
-                    AgregarAInventario modificar = new AgregarAInventario(this, true, "Modificar Producto");
-                    modificar.initInformation(this.tequilazo.getCategorias(), 
-                            this.tequilazo.getMarcas(), this.tequilazo.getUnidadesMedidas());
-                    modificar.setOldElement(el);
-                    //Modificar todos los datos con el elemento.
-                    modificar.setCode(el.getCodigo());
-                    modificar.setNombre(el.getProducto().getNombre());   
-                    modificar.setCategory(el.getProducto().getCategoria());
-                    modificar.setMark(el.getMarca());
-                    modificar.setUnitMed(el.getUnidadMedida());
-                    modificar.setStock(el.getStock());
-                    modificar.setPrecioCompra(el.getPrecioCompra());
-                    modificar.setPrecioVenta(el.getPrecioVenta());
-                    modificar.setPrecioVentaFuera(el.getPrecioVentaFuera());
-                    modificar.setCantAct(el.getCantidadActual());                    
-                    modificar.setVisible(true);
-                    //Operaciones en la base de datos para modificar el elemento.
-                    Elemento oldElement = modificar.getOldElement();
-                    Elemento newElement = modificar.getComponente();
-                    if(oldElement != null && newElement != null)
-                    {
-                        Producto prod = newElement.getProducto();
-                        int idCat = this.tequilazo.getBd().getCrudCategorias().leerCategoriaPorNombre(prod.getCategoria()).getCodigo();
-                        Producto product = this.tequilazo.getBd().getCrudProducto().getProductFromName(prod.getNombre());
-                        boolean ban = false;            
-                        if(product == null)
-                            ban = this.tequilazo.getBd().getCrudProducto().crearProducto(prod, idCat);
-                        else
-                        {
-                            ban = true;
-                            prod = product;
-                            newElement.setProducto(product);
-                        }
-                        int codeProd = this.tequilazo.getBd().getCrudProducto().getCodeFromProduct(prod);
-                        int codeMark = this.tequilazo.getBd().getCrudMarcas().getCodeFromMark(newElement.getMarca());
-                        int codeUnit = this.tequilazo.getBd().getCrudUnidades().getCodeFromUnit(newElement.getUnidadMedida());
-                        if(ban && codeProd != -99 && codeMark != -99 && codeUnit != -99)
-                        {
-                            //Se modifica el elemento del inventario.
-                            boolean band = this.tequilazo.getBd().getCrudElemento().updateElement
-                                            (oldElement, newElement, codeProd, codeMark, codeUnit);
-                            if(band)
-                            {
-                                JOptionPane.showMessageDialog(this, "Producto Modificado Correctamente");
-                                tequilazo.getInventario().updateComponent(oldElement, newElement);
-                                //this.paintTableInventario();
-                                this.pintor.paintTableInventory(this.modeloInventario, 
-                                            this.tequilazo.getInventario().getComponentes(), false);
-                            }
-                            else
-                                JOptionPane.showMessageDialog(this, "No Fue Posible Modificar El Producto");
-                        }
-                        else
-                            JOptionPane.showMessageDialog(this, "No Fue Posible Modificar El Producto");                        
-                    }                    
-                }
-                else
-                    JOptionPane.showMessageDialog(this, "Error Consultando La Base De Datos");
-            }
-            else
-            {
-                //Si le dio a cancelar no muestra nada.
-                if(passInput != null)
-                    JOptionPane.showMessageDialog(this, "La Contraseña Ingresada Es Incorrecta");                 
-            }                
-        }
+//        if(codeElement == null)
+//            JOptionPane.showMessageDialog(this, "No Seleccionó Ningún Elemento");
+//        else
+//        {
+//            String pass = "pensilvania";
+//            String passInput = JOptionPane.showInputDialog(this, "Ingrese La Contraseña: ");
+//            if(pass.equals(passInput))
+//            {
+//                Elemento el = this.tequilazo.getBd().getCrudElemento().getElementFromCode(codeElement);
+//                if(el != null)
+//                {
+//                    //Inicio el dialogo con los datos de "el".
+//                    AgregarAInventario modificar = new AgregarAInventario(this, true, "Modificar Producto");
+//                    modificar.initInformation(this.tequilazo.getCategorias(), 
+//                            this.tequilazo.getMarcas(), this.tequilazo.getUnidadesMedidas());
+//                    modificar.setOldElement(el);
+//                    //Modificar todos los datos con el elemento.
+//                    modificar.setCode(el.getCodigo());
+//                    modificar.setNombre(el.getProducto().getNombre());   
+//                    modificar.setCategory(el.getProducto().getCategoria());
+//                    modificar.setMark(el.getMarca());
+//                    modificar.setUnitMed(el.getUnidadMedida());
+//                    modificar.setStock(el.getStock());
+//                    modificar.setPrecioCompra(el.getPrecioCompra());
+//                    modificar.setPrecioVenta(el.getPrecioVenta());
+//                    modificar.setPrecioVentaFuera(el.getPrecioVentaFuera());
+//                    modificar.setCantAct(el.getCantidadActual());                    
+//                    modificar.setVisible(true);
+//                    //Operaciones en la base de datos para modificar el elemento.
+//                    Elemento oldElement = modificar.getOldElement();
+//                    Elemento newElement = modificar.getComponente();
+//                    if(oldElement != null && newElement != null)
+//                    {
+//                        Producto prod = newElement.getProducto();
+//                        int idCat = this.tequilazo.getBd().getCrudCategorias().leerCategoriaPorNombre(prod.getCategoria()).getCodigo();
+//                        Producto product = this.tequilazo.getBd().getCrudProducto().getProductFromName(prod.getNombre());
+//                        boolean ban = false;            
+//                        if(product == null)
+//                            ban = this.tequilazo.getBd().getCrudProducto().crearProducto(prod, idCat);
+//                        else
+//                        {
+//                            ban = true;
+//                            prod = product;
+//                            newElement.setProducto(product);
+//                        }
+//                        int codeProd = this.tequilazo.getBd().getCrudProducto().getCodeFromProduct(prod);
+//                        int codeMark = this.tequilazo.getBd().getCrudMarcas().getCodeFromMark(newElement.getMarca());
+//                        int codeUnit = this.tequilazo.getBd().getCrudUnidades().getCodeFromUnit(newElement.getUnidadMedida());
+//                        if(ban && codeProd != -99 && codeMark != -99 && codeUnit != -99)
+//                        {
+//                            //Se modifica el elemento del inventario.
+//                            boolean band = this.tequilazo.getBd().getCrudElemento().updateElement
+//                                            (oldElement, newElement, codeProd, codeMark, codeUnit);
+//                            if(band)
+//                            {
+//                                JOptionPane.showMessageDialog(this, "Producto Modificado Correctamente");
+//                                tequilazo.getInventario().updateComponent(oldElement, newElement);
+//                                //this.paintTableInventario();
+//                                this.pintor.paintTableInventory(this.modeloInventario, 
+//                                            this.tequilazo.getInventario().getComponentes(), false);
+//                            }
+//                            else
+//                                JOptionPane.showMessageDialog(this, "No Fue Posible Modificar El Producto");
+//                        }
+//                        else
+//                            JOptionPane.showMessageDialog(this, "No Fue Posible Modificar El Producto");                        
+//                    }                    
+//                }
+//                else
+//                    JOptionPane.showMessageDialog(this, "Error Consultando La Base De Datos");
+//            }
+//            else
+//            {
+//                //Si le dio a cancelar no muestra nada.
+//                if(passInput != null)
+//                    JOptionPane.showMessageDialog(this, "La Contraseña Ingresada Es Incorrecta");                 
+//            }                
+//        }
         
     }//GEN-LAST:event_btnModificarComponenteActionPerformed
 

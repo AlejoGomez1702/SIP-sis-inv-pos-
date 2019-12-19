@@ -1,5 +1,6 @@
 package logicainterfaz;
 
+import controladores.ProductoController;
 import principal.InterfazPrincipal;
 import java.awt.Color;
 import java.awt.Font;
@@ -67,6 +68,11 @@ public class LogicaInterfaz
      */
     private Tequilazo tequilazo;
     
+    /**
+     * Controlador para los productos del inventario.
+     */
+    public ProductoController productController;
+    
     
     /**
      * Inicializa la lógica con tamaño de borde y color de ellos.
@@ -81,6 +87,7 @@ public class LogicaInterfaz
         this.colorBorde = colComp;        
         this.fuente = new Font("Candara", Font.BOLD, 22);
         this.tequilazo=tequilazo;
+        this.productController = new ProductoController(tequilazo);
     }
     
     /**
