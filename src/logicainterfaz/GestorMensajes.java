@@ -47,7 +47,74 @@ public class GestorMensajes
         }       
         
         return muestra;
+    }    
+    
+    /**
+     * Obtiene el mensaje que se debe mostrar según el estado en el cual 
+     * termino el proceso de actualizar un producto del inventario.
+     * @param message Indicador que se envia desde la logica del error.
+     * @return Mensaje que se le debe mostrar al usuario.
+     */
+    public String getMessageUpdateProduct(int message)
+    {
+        String muestra = "";
+        switch(message)
+        {            
+            case (1):
+                muestra = "No Seleccionó Ningún Producto Del Inventario";
+                break;
+                
+            case (2):
+                muestra = "La Contraseña Ingresada Es Incorrecta";
+                break;
+                
+            case (3):
+                muestra = "Error Consultando El Producto En La Base De Datos";
+                break;
+                
+            case (5):
+                muestra = "Error Consultando Elementos En La Base De Datos";
+                break;
+                
+            case (6):
+                muestra = "Error Modificando Producto En La Base De Datos";
+                break;
+                
+            //Caso Válido.
+            case (10):
+                muestra = "!Producto Actualizado Correctamente!";
+                break;      
+        }       
+        
+        return muestra;
     }
     
+    /**
+     * Obtiene el mensaje que se debe mostrar según el estado en el cual 
+     * termino el proceso de crear un producto del inventario.
+     * @param message Indicador que se envia desde la logica del error.
+     * @return Mensaje que se le debe mostrar al usuario.
+     */
+    public String getMessageCreateProduct(int message)
+    {
+        String muestra = "";
+        switch(message)
+        {            
+            case (2):
+                muestra = "Error Consultando Elementos En La Base De Datos";
+                break;
+                
+            case (3):
+                muestra = "Error Creando Producto En La Base De Datos";
+                break;
+               
+            //Caso Válido.
+            case (10):
+                muestra = "!Producto Creado Correctamente!";
+                break;      
+        }       
+        
+        return muestra;
+    }
     
 }

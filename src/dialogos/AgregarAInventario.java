@@ -60,7 +60,7 @@ public class AgregarAInventario extends javax.swing.JDialog
         this.titulo = titulo;
         this.lblTitulo.setText(titulo);
         this.setLocationRelativeTo(null);
-        this.componente=null;
+        this.componente = null;
         this.categorias = new ArrayList<>();
         this.marcas = new ArrayList<>();
         this.unidadMedidas = new ArrayList<>();
@@ -95,6 +95,16 @@ public class AgregarAInventario extends javax.swing.JDialog
     public void setOldElement(Elemento oldElement) 
     {
         this.oldElement = oldElement;
+        this.setCode(oldElement.getCodigo());
+        this.setNombre(oldElement.getProducto().getNombre());
+        this.setCategory(oldElement.getProducto().getCategoria());
+        this.setMark(oldElement.getMarca());
+        this.setUnitMed(oldElement.getUnidadMedida());
+        this.setStock(oldElement.getStock());
+        this.setPrecioCompra(oldElement.getPrecioCompra());
+        this.setPrecioVenta(oldElement.getPrecioVenta());
+        this.setPrecioVentaFuera(oldElement.getPrecioVentaFuera());
+        this.setCantAct(oldElement.getCantidadActual());
     }    
     
     public Elemento getOldElement()
@@ -350,6 +360,7 @@ public class AgregarAInventario extends javax.swing.JDialog
 
         btnAceptar.setBackground(new java.awt.Color(52, 208, 142));
         btnAceptar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnAceptar.setForeground(new java.awt.Color(255, 255, 255));
         btnAceptar.setText("Aceptar");
         btnAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -361,6 +372,7 @@ public class AgregarAInventario extends javax.swing.JDialog
 
         btnCancelar.setBackground(new java.awt.Color(240, 80, 80));
         btnCancelar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

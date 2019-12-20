@@ -25,6 +25,7 @@ import logica.Proveedor;
 import logica.bd.Categoria;
 import logica.bd.Marca;
 import logica.bd.UnidadMedida;
+import logicainterfaz.GestorMensajes;
 import logicainterfaz.GestorTablas;
 import logicainterfaz.PintorTablas;
 
@@ -2850,88 +2851,12 @@ public class InterfazPrincipal extends javax.swing.JFrame
 
     private void btnModificarComponenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarComponenteActionPerformed
         String codeElement = this.gt.getCodeElementFromTable(this.tablaInventario);
-        int control = this.logica.productController.updateProduct(codeElement);
-        System.out.println("El control dice: " + control);
-        //System.out.println("El Código leido es: " + codeElement);
-//        if(codeElement == null)
-//            JOptionPane.showMessageDialog(this, "No Seleccionó Ningún Elemento");
-//        else
-//        {
-//            String pass = "pensilvania";
-//            String passInput = JOptionPane.showInputDialog(this, "Ingrese La Contraseña: ");
-//            if(pass.equals(passInput))
-//            {
-//                Elemento el = this.tequilazo.getBd().getCrudElemento().getElementFromCode(codeElement);
-//                if(el != null)
-//                {
-//                    //Inicio el dialogo con los datos de "el".
-//                    AgregarAInventario modificar = new AgregarAInventario(this, true, "Modificar Producto");
-//                    modificar.initInformation(this.tequilazo.getCategorias(), 
-//                            this.tequilazo.getMarcas(), this.tequilazo.getUnidadesMedidas());
-//                    modificar.setOldElement(el);
-//                    //Modificar todos los datos con el elemento.
-//                    modificar.setCode(el.getCodigo());
-//                    modificar.setNombre(el.getProducto().getNombre());   
-//                    modificar.setCategory(el.getProducto().getCategoria());
-//                    modificar.setMark(el.getMarca());
-//                    modificar.setUnitMed(el.getUnidadMedida());
-//                    modificar.setStock(el.getStock());
-//                    modificar.setPrecioCompra(el.getPrecioCompra());
-//                    modificar.setPrecioVenta(el.getPrecioVenta());
-//                    modificar.setPrecioVentaFuera(el.getPrecioVentaFuera());
-//                    modificar.setCantAct(el.getCantidadActual());                    
-//                    modificar.setVisible(true);
-//                    //Operaciones en la base de datos para modificar el elemento.
-//                    Elemento oldElement = modificar.getOldElement();
-//                    Elemento newElement = modificar.getComponente();
-//                    if(oldElement != null && newElement != null)
-//                    {
-//                        Producto prod = newElement.getProducto();
-//                        int idCat = this.tequilazo.getBd().getCrudCategorias().leerCategoriaPorNombre(prod.getCategoria()).getCodigo();
-//                        Producto product = this.tequilazo.getBd().getCrudProducto().getProductFromName(prod.getNombre());
-//                        boolean ban = false;            
-//                        if(product == null)
-//                            ban = this.tequilazo.getBd().getCrudProducto().crearProducto(prod, idCat);
-//                        else
-//                        {
-//                            ban = true;
-//                            prod = product;
-//                            newElement.setProducto(product);
-//                        }
-//                        int codeProd = this.tequilazo.getBd().getCrudProducto().getCodeFromProduct(prod);
-//                        int codeMark = this.tequilazo.getBd().getCrudMarcas().getCodeFromMark(newElement.getMarca());
-//                        int codeUnit = this.tequilazo.getBd().getCrudUnidades().getCodeFromUnit(newElement.getUnidadMedida());
-//                        if(ban && codeProd != -99 && codeMark != -99 && codeUnit != -99)
-//                        {
-//                            //Se modifica el elemento del inventario.
-//                            boolean band = this.tequilazo.getBd().getCrudElemento().updateElement
-//                                            (oldElement, newElement, codeProd, codeMark, codeUnit);
-//                            if(band)
-//                            {
-//                                JOptionPane.showMessageDialog(this, "Producto Modificado Correctamente");
-//                                tequilazo.getInventario().updateComponent(oldElement, newElement);
-//                                //this.paintTableInventario();
-//                                this.pintor.paintTableInventory(this.modeloInventario, 
-//                                            this.tequilazo.getInventario().getComponentes(), false);
-//                            }
-//                            else
-//                                JOptionPane.showMessageDialog(this, "No Fue Posible Modificar El Producto");
-//                        }
-//                        else
-//                            JOptionPane.showMessageDialog(this, "No Fue Posible Modificar El Producto");                        
-//                    }                    
-//                }
-//                else
-//                    JOptionPane.showMessageDialog(this, "Error Consultando La Base De Datos");
-//            }
-//            else
-//            {
-//                //Si le dio a cancelar no muestra nada.
-//                if(passInput != null)
-//                    JOptionPane.showMessageDialog(this, "La Contraseña Ingresada Es Incorrecta");                 
-//            }                
-//        }
-        
+        int control = this.logica.productController.updateProduct
+                                (codeElement, this.pintor, this.modeloInventario);
+        GestorMensajes mensaje = new GestorMensajes();
+        String alerta = mensaje.getMessageUpdateProduct(control);
+        if(!alerta.equals(""))
+            JOptionPane.showMessageDialog(this, alerta);        
     }//GEN-LAST:event_btnModificarComponenteActionPerformed
 
     private void btnImprimirInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirInventarioActionPerformed
@@ -3004,52 +2929,11 @@ public class InterfazPrincipal extends javax.swing.JFrame
     }//GEN-LAST:event_txtNuevaVentaMouseExited
 
     private void btnAgregarComponenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarComponenteActionPerformed
-        AgregarAInventario agregar = new AgregarAInventario(this, true, "Agregar Producto");
-        agregar.initInformation(this.tequilazo.getCategorias(), 
-                this.tequilazo.getMarcas(), this.tequilazo.getUnidadesMedidas());
-        agregar.setVisible(true);        
-        
-        Elemento comp = agregar.getComponente();
-        if(comp != null)
-        {
-            Producto prod = comp.getProducto();
-            //Obtengo el codigo de la categoria para agregarsela al producto en la base de datos.
-            int idCat = this.tequilazo.getBd().getCrudCategorias().leerCategoriaPorNombre(prod.getCategoria()).getCodigo();
-            //Validando que el producto ya este ingresado en la base de datos.
-            Producto product = this.tequilazo.getBd().getCrudProducto().getProductFromName(prod.getNombre());
-            //Si el producto no esta registrado en la base de datos.
-            boolean ban = false;            
-            if(product == null)
-            {
-                ban = this.tequilazo.getBd().getCrudProducto().crearProducto(prod, idCat);
-            }       
-            else
-            {
-                ban = true;
-                prod = product;
-                comp.setProducto(product);
-            }                        
-            
-            int codeProd = this.tequilazo.getBd().getCrudProducto().getCodeFromProduct(prod);
-            int codeMark = this.tequilazo.getBd().getCrudMarcas().getCodeFromMark(comp.getMarca());
-            int codeUnit = this.tequilazo.getBd().getCrudUnidades().getCodeFromUnit(comp.getUnidadMedida());
-            if(ban && codeProd != -99 && codeMark != -99 && codeUnit != -99)
-            {
-                boolean band = this.tequilazo.getBd().getCrudElemento().crearElemento(comp, codeProd, codeMark, codeUnit);
-                if(band)
-                {
-                    JOptionPane.showMessageDialog(this, "Producto Agregado Correctamente Al Inventario");
-                    tequilazo.getInventario().agregarComponente(comp);
-                    //this.paintTableInventario();
-                    this.pintor.paintTableInventory(this.modeloInventario, 
-                                this.tequilazo.getInventario().getComponentes(), false);
-                }
-                else
-                    JOptionPane.showMessageDialog(this, "No Fue Posible Agregar El Producto Al Inventario");
-            }
-            else
-                JOptionPane.showMessageDialog(this, "No Fue Posible Agregar El Producto Al Inventario");
-        }                
+        int control = this.logica.productController.createProduct
+                                            (this.pintor, this.modeloInventario);
+        String rpta = new GestorMensajes().getMessageCreateProduct(control);
+        if(!rpta.equals(""))
+            JOptionPane.showMessageDialog(this, rpta);
     }//GEN-LAST:event_btnAgregarComponenteActionPerformed
 
     private void txtAjustesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtAjustesMouseEntered
@@ -3070,33 +2954,8 @@ public class InterfazPrincipal extends javax.swing.JFrame
         //Iniciando el tablero de listado de categorías.
         this.logica.refrescarContenido(this.panelAjustesElementos, this.panelAjustesCategorias);
         
-        //Refrescando la tabla de categorias de productos
-        //La cual es la primera que se muestra 
-        int a = modeloAjustes.getRowCount()-1;
-        for(int i=a; i>=0; i--)
-            modeloAjustes.removeRow(i);       
-
-        if(this.ajuste == 'c')
-        {
-            try
-            {
-                int numC = this.tequilazo.getCategorias().size();
-                Categoria c;
-                for(int i = 0; i < numC; i++)
-                {
-                    c = this.tequilazo.getCategorias().get(i);
-                     String [] fila ={c.getCodigo()+"", c.getNombre(), c.getDescripcion()};
-                     modeloAjustes.addRow(fila);
-                }            
-            }
-            catch(Exception e) 
-            {
-                JOptionPane.showMessageDialog(null,"Actualmente No Hay Categorias De Productos");
-            }
-        }
-        
-        
-        
+        this.pintor.paintTableAdjustments(modeloAjustes, ajuste,this.tequilazo.getCategorias(),
+                                this.tequilazo.getMarcas(), this.tequilazo.getUnidadesMedidas());        
     }//GEN-LAST:event_txtAjustesMouseClicked
 
     private void lblCategoriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCategoriasMouseClicked
@@ -3105,24 +2964,8 @@ public class InterfazPrincipal extends javax.swing.JFrame
         this.logica.crearInteractividadBotones(this.lblMarcas, false);
         this.logica.crearInteractividadBotones(this.lblUnidades, false);        
         this.logica.refrescarContenido(this.panelAjustesElementos, this.panelAjustesCategorias);
-        int a = modeloAjustes.getRowCount()-1;
-        for(int i=a; i>=0; i--)
-            modeloAjustes.removeRow(i); 
-        try
-        {
-            int numC = this.tequilazo.getCategorias().size();
-            Categoria c;
-            for(int i = 0; i < numC; i++)
-            {
-                c = this.tequilazo.getCategorias().get(i);
-                 String [] fila ={c.getCodigo()+"", c.getNombre(), c.getDescripcion()};
-                 modeloAjustes.addRow(fila);
-            }            
-        }
-        catch(Exception e) 
-        {
-            JOptionPane.showMessageDialog(null,"Actualmente No Hay Categorias De Productos");
-        }
+        this.pintor.paintTableAdjustments(modeloAjustes, ajuste,this.tequilazo.getCategorias(),
+                                this.tequilazo.getMarcas(), this.tequilazo.getUnidadesMedidas());  
     }//GEN-LAST:event_lblCategoriasMouseClicked
 
     private void lblMarcasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMarcasMouseClicked
@@ -3131,26 +2974,8 @@ public class InterfazPrincipal extends javax.swing.JFrame
         this.logica.crearInteractividadBotones(this.lblMarcas, true);
         this.logica.crearInteractividadBotones(this.lblUnidades, false);               
         this.logica.refrescarContenido(this.panelAjustesElementos, this.panelAjustesMarcas);
-        int a = modeloAjustes.getRowCount()-1;
-        for(int i=a; i>=0; i--)
-            modeloAjustes.removeRow(i); 
-        
-        try
-        {
-            int numM = this.tequilazo.getMarcas().size();
-            Marca m;
-            for(int i = 0; i < numM; i++)
-            {
-                m = this.tequilazo.getMarcas().get(i);
-                 String [] fila ={m.getCodigo()+"", m.getNombre(), m.getDescripcion()};
-                 modeloAjustes.addRow(fila);
-            }            
-        }
-        catch(Exception e) 
-        {
-            JOptionPane.showMessageDialog(null,"Actualmente No Hay Categorias De Productos");
-        }
-        
+        this.pintor.paintTableAdjustments(modeloAjustes, ajuste,this.tequilazo.getCategorias(),
+                                this.tequilazo.getMarcas(), this.tequilazo.getUnidadesMedidas());          
     }//GEN-LAST:event_lblMarcasMouseClicked
 
     private void lblUnidadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblUnidadesMouseClicked
@@ -3159,25 +2984,8 @@ public class InterfazPrincipal extends javax.swing.JFrame
         this.logica.crearInteractividadBotones(this.lblMarcas, false);
         this.logica.crearInteractividadBotones(this.lblUnidades, true);        
         this.logica.refrescarContenido(this.panelAjustesElementos, this.panelAjustesUnidades);
-        int a = modeloAjustes.getRowCount()-1;
-        for(int i=a; i>=0; i--)
-            modeloAjustes.removeRow(i); 
-        
-        try
-        {
-            int numU = this.tequilazo.getUnidadesMedidas().size();
-            UnidadMedida um;
-            for(int i = 0; i < numU; i++)
-            {
-                um = this.tequilazo.getUnidadesMedidas().get(i);
-                String [] fila ={um.getCodigo()+"", um.getNombre(), um.getDescripcion()};
-                modeloAjustes.addRow(fila);
-            }            
-        }
-        catch(Exception e) 
-        {
-            JOptionPane.showMessageDialog(null,"Actualmente No Hay Categorias De Productos");
-        }
+        this.pintor.paintTableAdjustments(modeloAjustes, ajuste,this.tequilazo.getCategorias(),
+                                this.tequilazo.getMarcas(), this.tequilazo.getUnidadesMedidas());  
         
     }//GEN-LAST:event_lblUnidadesMouseClicked
 
