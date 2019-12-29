@@ -344,6 +344,7 @@ public class InterfazPrincipal extends javax.swing.JFrame
         lblIconoProductos3 = new javax.swing.JLabel();
         txtCode = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
+        btnDeleteCode = new javax.swing.JButton();
         panelScanner = new javax.swing.JPanel();
         jSeparator7 = new javax.swing.JSeparator();
         jPanel14 = new javax.swing.JPanel();
@@ -2071,33 +2072,20 @@ public class InterfazPrincipal extends javax.swing.JFrame
 
         jLabel15.setText("Escaneo Código");
 
+        btnDeleteCode.setBackground(new java.awt.Color(255, 51, 51));
+        btnDeleteCode.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
+        btnDeleteCode.setForeground(new java.awt.Color(255, 255, 255));
+        btnDeleteCode.setText("Borrar");
+        btnDeleteCode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteCodeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelCrearVentaLayout = new javax.swing.GroupLayout(panelCrearVenta);
         panelCrearVenta.setLayout(panelCrearVentaLayout);
         panelCrearVentaLayout.setHorizontalGroup(
             panelCrearVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelCrearVentaLayout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addGroup(panelCrearVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(panelCrearVentaLayout.createSequentialGroup()
-                        .addGap(0, 1, Short.MAX_VALUE)
-                        .addComponent(panelEncabezado1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelCrearVentaLayout.createSequentialGroup()
-                        .addComponent(lblObservaciones1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 636, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(panelCrearVentaLayout.createSequentialGroup()
-                        .addGroup(panelCrearVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(panelCrearVentaLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(lblObservaciones4)
-                                .addGap(87, 87, 87)
-                                .addComponent(btnRemover)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnLimpiarTabla))
-                            .addComponent(jScrollPane5))
-                        .addGap(1, 1, 1)))
-                .addGap(47, 47, 47))
             .addGroup(panelCrearVentaLayout.createSequentialGroup()
                 .addGap(250, 250, 250)
                 .addComponent(btnCancelarVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2106,13 +2094,14 @@ public class InterfazPrincipal extends javax.swing.JFrame
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCrearVentaLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblObservaciones3)
+                .addGap(18, 18, 18)
+                .addComponent(txtTotalResumenVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(48, 48, 48))
+            .addGroup(panelCrearVentaLayout.createSequentialGroup()
+                .addGap(46, 46, 46)
                 .addGroup(panelCrearVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCrearVentaLayout.createSequentialGroup()
-                        .addComponent(lblObservaciones3)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtTotalResumenVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(48, 48, 48))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCrearVentaLayout.createSequentialGroup()
+                    .addGroup(panelCrearVentaLayout.createSequentialGroup()
                         .addGroup(panelCrearVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelCrearVentaLayout.createSequentialGroup()
                                 .addComponent(lblProveedores1)
@@ -2130,14 +2119,38 @@ public class InterfazPrincipal extends javax.swing.JFrame
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 447, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel15)
                                 .addGap(41, 41, 41)))
-                        .addGap(88, 88, 88))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnDeleteCode)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(panelCrearVentaLayout.createSequentialGroup()
+                        .addGroup(panelCrearVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(panelCrearVentaLayout.createSequentialGroup()
+                                .addGap(0, 1, Short.MAX_VALUE)
+                                .addComponent(panelEncabezado1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelCrearVentaLayout.createSequentialGroup()
+                                .addComponent(lblObservaciones1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 636, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(panelCrearVentaLayout.createSequentialGroup()
+                                .addGroup(panelCrearVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(panelCrearVentaLayout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(lblObservaciones4)
+                                        .addGap(87, 87, 87)
+                                        .addComponent(btnRemover)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(btnLimpiarTabla))
+                                    .addComponent(jScrollPane5))
+                                .addGap(1, 1, 1)))
+                        .addGap(47, 47, 47))))
         );
         panelCrearVentaLayout.setVerticalGroup(
             panelCrearVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelCrearVentaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(panelEncabezado1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel15)
                 .addGap(5, 5, 5)
                 .addGroup(panelCrearVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -2145,10 +2158,12 @@ public class InterfazPrincipal extends javax.swing.JFrame
                         .addComponent(lblIconoProductos2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnAgregarProdVenta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnAgregarCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblIconoProductos3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(lblIconoProductos3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(lblProveedores1)
-                    .addComponent(txtCode, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelCrearVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtCode, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnDeleteCode)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelCrearVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelCrearVentaLayout.createSequentialGroup()
                         .addComponent(lblObservaciones1)
@@ -4078,7 +4093,7 @@ public class InterfazPrincipal extends javax.swing.JFrame
         if(code.length() == 14)
         {
             Elemento el = (Elemento) this.tequilazo.getMap().get(code);
-            System.out.println("EL CÓDIIGOOOO ESSS: "+ el.getCodigo());
+            //System.out.println("EL CÓDIIGOOOO ESSS: "+ el.getCodigo());
             this.ventaController.addProduct(el.getCodigo());
             this.txtCode.setText("");
         }
@@ -4087,6 +4102,10 @@ public class InterfazPrincipal extends javax.swing.JFrame
         this.pintor.paintTableSumarySale(this.modeloResumenVenta, 
                 this.componentesNuevos, this.txtTotalResumenVenta, false);
     }//GEN-LAST:event_txtCodeKeyPressed
+
+    private void btnDeleteCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteCodeActionPerformed
+        this.txtCode.setText("");
+    }//GEN-LAST:event_btnDeleteCodeActionPerformed
     
     /**
      * Hace todo el proceso para agregar un proveedor al hacer click en nuevo.
@@ -4128,6 +4147,7 @@ public class InterfazPrincipal extends javax.swing.JFrame
     private javax.swing.JButton btnCancelarVenta;
     private javax.swing.JButton btnCrearCompra;
     private javax.swing.JButton btnCrearVenta;
+    private javax.swing.JButton btnDeleteCode;
     private javax.swing.JButton btnDetalleCompra;
     private javax.swing.JButton btnDetalleVenta;
     private javax.swing.JButton btnEliminarCategoria;
