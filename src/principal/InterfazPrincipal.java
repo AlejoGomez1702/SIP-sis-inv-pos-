@@ -3,7 +3,6 @@ import controladores.ProductoController;
 import controladores.VentaController;
 import dialogos.*;
 import java.awt.Color;
-import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -2885,86 +2884,11 @@ public class InterfazPrincipal extends javax.swing.JFrame
 
     private void btnModificarComponenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarComponenteActionPerformed
         String codeElement = this.gt.getCodeElementFromTable(this.tablaInventario);
-        //System.out.println("El Código leido es: " + codeElement);
-        if(codeElement == null)
-            JOptionPane.showMessageDialog(this, "No Seleccionó Ningún Elemento");
-        else
-        {
-            String pass = "pensilvania";
-            String passInput = JOptionPane.showInputDialog(this, "Ingrese La Contraseña: ");
-            if(pass.equals(passInput))
-            {
-                Elemento el = this.tequilazo.getBd().getCrudElemento().getElementFromCode(codeElement);
-                if(el != null)
-                {
-                    //Inicio el dialogo con los datos de "el".
-                    AgregarAInventario modificar = new AgregarAInventario(this, true, "Modificar Producto");
-                    modificar.initInformation(this.tequilazo.getCategorias(), 
-                            this.tequilazo.getMarcas(), this.tequilazo.getUnidadesMedidas());
-                    modificar.setOldElement(el);
-                    //Modificar todos los datos con el elemento.
-                    modificar.setCode(el.getCodigo());
-                    modificar.setNombre(el.getProducto().getNombre());   
-                    modificar.setCategory(el.getProducto().getCategoria());
-                    modificar.setMark(el.getMarca());
-                    modificar.setUnitMed(el.getUnidadMedida());
-                    modificar.setStock(el.getStock());
-                    modificar.setPrecioCompra(el.getPrecioCompra());
-                    modificar.setPrecioVenta(el.getPrecioVenta());
-                    //modificar.setPrecioVentaFuera(el.getPrecioVentaFuera());
-                    modificar.setCantAct(el.getCantidadActual());                    
-                    modificar.setVisible(true);
-                    //Operaciones en la base de datos para modificar el elemento.
-                    Elemento oldElement = modificar.getOldElement();
-                    Elemento newElement = modificar.getComponente();
-                    if(oldElement != null && newElement != null)
-                    {
-                        Producto prod = newElement.getProducto();
-                        int idCat = this.tequilazo.getBd().getCrudCategorias().leerCategoriaPorNombre(prod.getCategoria()).getCodigo();
-                        Producto product = this.tequilazo.getBd().getCrudProducto().getProductFromName(prod.getNombre());
-                        boolean ban = false;            
-                        if(product == null)
-                            ban = this.tequilazo.getBd().getCrudProducto().crearProducto(prod, idCat);
-                        else
-                        {
-                            ban = true;
-                            prod = product;
-                            newElement.setProducto(product);
-                        }
-                        int codeProd = this.tequilazo.getBd().getCrudProducto().getCodeFromProduct(prod);
-                        int codeMark = this.tequilazo.getBd().getCrudMarcas().getCodeFromMark(newElement.getMarca());
-                        int codeUnit = this.tequilazo.getBd().getCrudUnidades().getCodeFromUnit(newElement.getUnidadMedida());
-                        if(ban && codeProd != -99 && codeMark != -99 && codeUnit != -99)
-                        {
-                            //Se modifica el elemento del inventario.
-                            boolean band = this.tequilazo.getBd().getCrudElemento().updateElement
-                                            (oldElement, newElement, codeProd, codeMark, codeUnit);
-                            if(band)
-                            {
-                                JOptionPane.showMessageDialog(this, "Producto Modificado Correctamente");
-                                tequilazo.getInventario().updateComponent(oldElement, newElement);
-                                //this.paintTableInventario();
-                                this.pintor.paintTableInventory(this.modeloInventario, 
-                                            this.tequilazo.getInventario().getComponentes(), false);
-                            }
-                            else
-                                JOptionPane.showMessageDialog(this, "No Fue Posible Modificar El Producto");
-                        }
-                        else
-                            JOptionPane.showMessageDialog(this, "No Fue Posible Modificar El Producto");                        
-                    }                    
-                }
-                else
-                    JOptionPane.showMessageDialog(this, "Error Consultando La Base De Datos");
-            }
-            else
-            {
-                //Si le dio a cancelar no muestra nada.
-                if(passInput != null)
-                    JOptionPane.showMessageDialog(this, "La Contraseña Ingresada Es Incorrecta");                 
-            }                
-        }
-        
+        int control = this.productController.updateProduct
+                                (codeElement, this.pintor, this.modeloInventario);
+        String alerta = this.gm.getMessageUpdateProduct(control);
+        if(!alerta.equals(""))
+            JOptionPane.showMessageDialog(this, alerta);                 
     }//GEN-LAST:event_btnModificarComponenteActionPerformed
 
     private void btnImprimirInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirInventarioActionPerformed
@@ -3009,14 +2933,7 @@ public class InterfazPrincipal extends javax.swing.JFrame
     private void txtNuevaVentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNuevaVentaMouseClicked
         this.logica.crearInteractividadBotones(this.panelNuevaVenta, this.txtNuevaVenta, false);
         this.txtCode.setText("");
-        //Enfocando en el texto para el escaner.
-//        JTextField jt = this.txtCode;
-//        this.addWindowListener( new WindowAdapter() {
-//            public void windowOpened( WindowEvent e ){
-//                jt.requestFocus();
-//            }
-//        });
-        //Para Limpiar la tabla
+
         this.componentesNuevos.clear();
         this.txtTotalResumenVenta.setText("0");
         this.pintor.clearDataFromTable(this.modeloResumenVenta);           
@@ -3045,52 +2962,11 @@ public class InterfazPrincipal extends javax.swing.JFrame
     }//GEN-LAST:event_txtNuevaVentaMouseExited
 
     private void btnAgregarComponenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarComponenteActionPerformed
-        AgregarAInventario agregar = new AgregarAInventario(this, true, "Agregar Producto");
-        agregar.initInformation(this.tequilazo.getCategorias(), 
-                this.tequilazo.getMarcas(), this.tequilazo.getUnidadesMedidas());
-        agregar.setVisible(true);        
-        
-        Elemento comp = agregar.getComponente();
-        if(comp != null)
-        {
-            Producto prod = comp.getProducto();
-            //Obtengo el codigo de la categoria para agregarsela al producto en la base de datos.
-            int idCat = this.tequilazo.getBd().getCrudCategorias().leerCategoriaPorNombre(prod.getCategoria()).getCodigo();
-            //Validando que el producto ya este ingresado en la base de datos.
-            Producto product = this.tequilazo.getBd().getCrudProducto().getProductFromName(prod.getNombre());
-            //Si el producto no esta registrado en la base de datos.
-            boolean ban = false;            
-            if(product == null)
-            {
-                ban = this.tequilazo.getBd().getCrudProducto().crearProducto(prod, idCat);
-            }       
-            else
-            {
-                ban = true;
-                prod = product;
-                comp.setProducto(product);
-            }                        
-            
-            int codeProd = this.tequilazo.getBd().getCrudProducto().getCodeFromProduct(prod);
-            int codeMark = this.tequilazo.getBd().getCrudMarcas().getCodeFromMark(comp.getMarca());
-            int codeUnit = this.tequilazo.getBd().getCrudUnidades().getCodeFromUnit(comp.getUnidadMedida());
-            if(ban && codeProd != -99 && codeMark != -99 && codeUnit != -99)
-            {
-                boolean band = this.tequilazo.getBd().getCrudElemento().crearElemento(comp, codeProd, codeMark, codeUnit);
-                if(band)
-                {
-                    JOptionPane.showMessageDialog(this, "Producto Agregado Correctamente Al Inventario");
-                    tequilazo.getInventario().agregarComponente(comp);
-                    //this.paintTableInventario();
-                    this.pintor.paintTableInventory(this.modeloInventario, 
-                                this.tequilazo.getInventario().getComponentes(), false);
-                }
-                else
-                    JOptionPane.showMessageDialog(this, "No Fue Posible Agregar El Producto Al Inventario");
-            }
-            else
-                JOptionPane.showMessageDialog(this, "No Fue Posible Agregar El Producto Al Inventario");
-        }                
+        int control = this.productController.createProduct
+                                            (this.pintor, this.modeloInventario);
+        String rpta = new GestorMensajes().getMessageCreateProduct(control);
+        if(!rpta.equals(""))
+            JOptionPane.showMessageDialog(this, rpta);             
     }//GEN-LAST:event_btnAgregarComponenteActionPerformed
 
     private void txtAjustesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtAjustesMouseEntered
@@ -3135,9 +3011,6 @@ public class InterfazPrincipal extends javax.swing.JFrame
                 JOptionPane.showMessageDialog(null,"Actualmente No Hay Categorias De Productos");
             }
         }
-        
-        
-        
     }//GEN-LAST:event_txtAjustesMouseClicked
 
     private void lblCategoriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCategoriasMouseClicked
@@ -3833,95 +3706,25 @@ public class InterfazPrincipal extends javax.swing.JFrame
             JOptionPane.showMessageDialog(this, "Error Con La Venta: " + e.getMessage());
         }
         
-        Venta vent;
-        if(numVenta != -1 && !fecha.equals("Error") && total != -1)
-        {
-            //Se crea la venta y se gestiona la base de datos.
-            vent = new Venta(numVenta, cliente, fecha, observ, false, total);
-            if(!this.componentesNuevos.isEmpty())
-            {
-                ArrayList<Elemento> newElements = new ArrayList<>();
-                newElements.addAll(this.componentesNuevos);
-                vent.setElementos(newElements);
-                boolean add = this.tequilazo.addSale(vent);
-                if(add)
-                {
-                    //Modifico el inventario, dismuniyo la cantidad a los productos vendido.
-                    boolean ban = this.tequilazo.getBd().getCrudElementoVendido().modifyInventorySale
-                            (this.tequilazo.getInventario().getComponentes(), componentesNuevos);
-                    if(ban)
-                    {
-                        this.tequilazo.getVentas().add(vent);
-                        this.clienteVenta = new Cliente("","","");
-                        //////////////////////////////////
-                        int opc = JOptionPane.showConfirmDialog(null, "Desea Imprimir Factura?",
-                                "Imprimir Factura", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-                        //0 para si || 1 para no
-                        if (opc == 0)
-                        {
-                            PrinterJob pj = PrinterJob.getPrinterJob();
-                            Factura fac = new Factura('v', vent);
-                            pj.setPrintable(fac,fac.getPageFormat(pj));
-                            try 
-                            {
-                                //pj.printDialog();
-                                pj.print();
-                            } catch (PrinterException e) 
-                            {
-                                JOptionPane.showMessageDialog(this, "Error Con La Impresión");
-                            }  
-                            
-                            int opc2 = JOptionPane.showConfirmDialog(null, "Desea Imprimir Copia?",
-                                "Imprimir Copia", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-                            if (opc2 == 0)
-                            {
-                                PrinterJob pj2 = PrinterJob.getPrinterJob();
-                                Factura fac2 = new Factura('v', vent);
-                                pj.setPrintable(fac2,fac.getPageFormat(pj2));
-                                try 
-                                {
-                                    //pj.printDialog();
-                                    pj.print();
-                                } catch (PrinterException e) 
-                                {
-                                    JOptionPane.showMessageDialog(this, "Error Con La Impresión");
-                                }
-                            }                        
-                        }    
-                        else
-                        {
-                            PrinterJob pj = PrinterJob.getPrinterJob();
-                            Factura fac = new Factura('c', null);
-                            fac.takeOutBox(pj);
-                        }
-                        ///////////////////////////////////
-                        this.pintor.paintTableInventory(this.modeloInventario, 
-                                this.tequilazo.getInventario().getComponentes(), false);
-                        JOptionPane.showMessageDialog(this, "Venta Registrada Correctamente");
-                        this.componentesNuevos.clear();
-                        this.pintor.clearDataFromTable(this.modeloResumenVenta);
-                        this.txtObservacionesVenta.setText("");
-                        this.txtTotalResumenVenta.setText("0");
-                        ArrayList<Venta> ven = this.tequilazo.getDailySales();
-                        this.pintor.paintTableDailySales(modeloVentasDia, ven);  
-                    }                            
-                    else
-                        JOptionPane.showMessageDialog(this, "No Fue Posible Registrar La Venta: "
-                                + "ERROR HACIENDO LA MODIFICACIÓN EN LA BASE DE DATOS");
-                }
-                else
-                    JOptionPane.showMessageDialog(this, "No Se Pudo Registrar La Venta: "
-                            + "nO SE PUDO AÑADIR LA VENTA A LA LÓGICA");
-            }
-            else
-                JOptionPane.showMessageDialog(this, "No Ha Agregado Productos A La Venta");
-        }
-        else
-            JOptionPane.showMessageDialog(this, "Error Intentando Registrar La Venta: "
-                    + "ERROR EN LA VALIDACIÓN PRINCIPAL");
+        int msj = this.ventaController.createSale(numVenta, fecha, observ, cliente, 
+                                                total, this.componentesNuevos);
+        String mostrar = this.gm.getMessageCreateSale(msj);
+        JOptionPane.showMessageDialog(this, mostrar);
+        
+        ///////////////////////////////////////////////////////////////////////
+        this.pintor.paintTableInventory(this.modeloInventario, 
+                this.tequilazo.getInventario().getComponentes(), false);
+        //JOptionPane.showMessageDialog(this, "Venta Registrada Correctamente");
+        this.componentesNuevos.clear();
+        this.pintor.clearDataFromTable(this.modeloResumenVenta);
+        this.txtObservacionesVenta.setText("");
+        this.txtTotalResumenVenta.setText("0");
+        ArrayList<Venta> ven = this.tequilazo.getDailySales();
+        this.pintor.paintTableDailySales(modeloVentasDia, ven); 
         
         this.logica.crearInteractividadBotones(this.panelNuevaVenta, this.txtNuevaVenta, false);
         this.logica.refrescarContenido(this.panelPrincipal, this.panelInicio);
+        
     }//GEN-LAST:event_btnCrearVentaActionPerformed
 
     private void btnAgregarProductosCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarProductosCompraActionPerformed
@@ -4106,8 +3909,12 @@ public class InterfazPrincipal extends javax.swing.JFrame
         {
             Elemento el = (Elemento) this.tequilazo.getMap().get(code);
             //System.out.println("EL CÓDIIGOOOO ESSS: "+ el.getCodigo());
-            this.ventaController.addProduct(el.getCodigo());
-            this.txtCode.setText("");
+            if(el != null)            
+                this.ventaController.addProduct(el.getCodigo());                            
+            else            
+                JOptionPane.showMessageDialog(this, "Código No Registrado");
+            
+            this.txtCode.setText("");    
         }
         
         this.componentesNuevos = this.ventaController.getElementsSale();

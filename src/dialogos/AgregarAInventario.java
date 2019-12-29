@@ -95,6 +95,16 @@ public class AgregarAInventario extends javax.swing.JDialog
     public void setOldElement(Elemento oldElement) 
     {
         this.oldElement = oldElement;
+        this.setCode(oldElement.getCodigo());
+        this.setNombre(oldElement.getProducto().getNombre());
+        this.setCategory(oldElement.getProducto().getCategoria());
+        this.setMark(oldElement.getMarca());
+        this.setUnitMed(oldElement.getUnidadMedida());
+        this.setStock(oldElement.getStock());
+        this.setPrecioCompra(oldElement.getPrecioCompra());
+        this.setPrecioVenta(oldElement.getPrecioVenta());
+        //this.setPrecioVentaFuera(oldElement.getPrecioVentaFuera());
+        this.setCantAct(oldElement.getCantidadActual());
     }    
     
     public Elemento getOldElement()
