@@ -443,9 +443,8 @@ public class GestorTablas
         
         TableRowSorter<DefaultTableModel> trsfiltro = new TableRowSorter(modelo);
         tabla.setRowSorter(trsfiltro); 
-        trsfiltro.setRowFilter(RowFilter.regexFilter(filtro, campo));               
-    }   
+        //trsfiltro.setRowFilter(RowFilter.regexFilter(filtro, campo));     
+        trsfiltro.setRowFilter(RowFilter.regexFilter("(?i)" + filtro));
+    }     
         
-    
-    
 }
