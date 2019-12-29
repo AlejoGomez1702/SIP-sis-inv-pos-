@@ -268,7 +268,8 @@ public class Tequilazo
         SimpleDateFormat format1 = new SimpleDateFormat("yyyy/MM/dd");          
         String initialDate = null;
         String finishDate = null;
-        try {
+        try 
+        {
             finishDate = format1.format(dateInitial);
             
             calendar.add(Calendar.DATE, -10);
