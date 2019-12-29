@@ -117,4 +117,48 @@ public class GestorMensajes
         return muestra;
     }
     
+    /**
+     * Obtiene el mensaje que se debe mostrar según el estado en el cual 
+     * termino el proceso de crear una nueva venta en el negocio.
+     * @param message Indicador que se envia desde la logica del error.
+     * @return Mensaje que se le debe mostrar al usuario.
+     */
+    public String getMessageCreateSale(int message)
+    {
+        String muestra = "";
+        switch(message)
+        {            
+            case (0):
+                muestra = "ERROR, No Se Han Agregado Productos A La Venta";
+                break;
+                
+            case (1):
+                muestra = "ERROR, Problemas Con El Número De La Venta";
+                break;
+                
+            case (2):
+                muestra = "ERROR, Problemas Con La Fecha De La Venta";
+                break;
+                
+            case (3):
+                muestra = "ERROR, Problemas Con El Valor Total La Venta";
+                break;
+                
+            case (4):
+                muestra = "ERROR, Problemas Añadiendo La Venta A La Base De Datos";
+                break;
+                
+            case (5):
+                muestra = "ERROR, Problemas Disminuyendo La Cantidad Del Inventario";
+                break;
+               
+            //Caso Válido.
+            case (10):
+                muestra = "!Venta Registrada Correctamente!";
+                break;      
+        }       
+        
+        return muestra;
+    }
+    
 }

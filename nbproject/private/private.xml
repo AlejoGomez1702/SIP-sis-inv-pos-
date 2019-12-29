@@ -5,11 +5,11 @@
         <group>
             <file>file:/C:/Users/Alejo/Documents/NetBeansProjects/SistemaInventariadoPos/src/logicainterfaz/PintorTablas.java</file>
             <file>file:/C:/Users/Alejo/Documents/NetBeansProjects/SistemaInventariadoPos/src/logicainterfaz/GestorMensajes.java</file>
+            <file>file:/C:/Users/Alejo/Documents/NetBeansProjects/SistemaInventariadoPos/src/bd/CrudElementoVendido.java</file>
             <file>file:/C:/Users/Alejo/Documents/NetBeansProjects/SistemaInventariadoPos/src/dialogos/MenudearProducto.java</file>
+            <file>file:/C:/Users/Alejo/Documents/NetBeansProjects/SistemaInventariadoPos/src/controladores/VentaController.java</file>
             <file>file:/C:/Users/Alejo/Documents/NetBeansProjects/SistemaInventariadoPos/src/principal/Main.java</file>
-            <file>file:/C:/Users/Alejo/Documents/NetBeansProjects/SistemaInventariadoPos/src/controladores/ProductoController.java</file>
             <file>file:/C:/Users/Alejo/Documents/NetBeansProjects/SistemaInventariadoPos/src/bd/CrudMarca.java</file>
-            <file>file:/C:/Users/Alejo/Documents/NetBeansProjects/SistemaInventariadoPos/src/logicainterfaz/LogicaInterfaz.java</file>
             <file>file:/C:/Users/Alejo/Documents/NetBeansProjects/SistemaInventariadoPos/src/principal/InterfazPrincipal.java</file>
         </group>
     </open-files>

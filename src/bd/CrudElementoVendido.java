@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package bd;
 
 import java.sql.PreparedStatement;
@@ -16,18 +11,18 @@ import logica.Venta;
  *
  * @author Alejo
  */
-public class CrudElementoVendido {
-    
+public class CrudElementoVendido 
+{    
     /**
      * Conexión con la base de datos.
      */
     private Conexion conexion;
 
-    public CrudElementoVendido(Conexion con) {
+    public CrudElementoVendido(Conexion con) 
+    {
         this.conexion = con;
     }
-    
-    
+        
     public boolean insertElementsFromSale(Venta sale)
     {
         if(sale == null)
@@ -74,7 +69,8 @@ public class CrudElementoVendido {
     }
     
     
-    public boolean modifyInventorySale(ArrayList<Elemento> existentes, ArrayList<Elemento> agregados)
+    public boolean modifyInventorySale(ArrayList<Elemento> existentes, 
+                                                ArrayList<Elemento> agregados)
     {
         if(existentes.isEmpty() || agregados.isEmpty())
             return false;

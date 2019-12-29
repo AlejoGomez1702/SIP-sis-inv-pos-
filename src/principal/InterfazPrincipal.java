@@ -1,4 +1,5 @@
 package principal;
+import controladores.VentaController;
 import dialogos.*;
 import java.awt.Color;
 import java.awt.print.PrinterException;
@@ -20,7 +21,6 @@ import logica.Elemento;
 import logica.Venta;
 import logica.Compra;
 import logica.gestores.Factura;
-import logica.Producto;
 import logica.Proveedor;
 import logica.bd.Categoria;
 import logica.bd.Marca;
@@ -129,14 +129,25 @@ public class InterfazPrincipal extends javax.swing.JFrame
      * 'c'-->Categorias, 'm'-->Marcas, 'u'-->Unidades de medida.
      */
     private char ajuste;  
-     
+    
+    /**
+     * Controlador para las ventas del negocio.
+     */
+    private VentaController saleController;
+    
+    /**
+     * Permite la gestión de los mensajes que se le muestran al usuario.
+     */
+    private GestorMensajes gm;
+        
     
     public InterfazPrincipal(Tequilazo tequilazo) 
     {          
         initComponents();    
         this.gt = new GestorTablas();
         this.pintor = new PintorTablas();        
-        this.tequilazo=tequilazo;        
+        this.tequilazo = tequilazo;
+        this.saleController = new VentaController(tequilazo);
         
         this.logica = new LogicaInterfaz(2, Color.BLACK,tequilazo);
         this.logica.iniciarEstilosPrincipal(this, panelNav, panelEncab, panelPrincipal, panelContenido);
@@ -145,7 +156,7 @@ public class InterfazPrincipal extends javax.swing.JFrame
         this.componentesNuevos = new ArrayList<>();
         this.initInformation();
         this.clienteVenta = new Cliente("","","");
-                     
+        this.gm = new GestorMensajes();
     }
     
     /**
@@ -1275,13 +1286,13 @@ public class InterfazPrincipal extends javax.swing.JFrame
         panelCrudBotones1Layout.setHorizontalGroup(
             panelCrudBotones1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelCrudBotones1Layout.createSequentialGroup()
-                .addGap(109, 109, 109)
+                .addGap(57, 57, 57)
                 .addGroup(panelCrudBotones1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelCrudBotones1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(fechaInicialVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                         .addComponent(jLabel4))
                     .addGroup(panelCrudBotones1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
@@ -1290,9 +1301,9 @@ public class InterfazPrincipal extends javax.swing.JFrame
                 .addGroup(panelCrudBotones1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(fechaFinalVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscarVentas))
-                .addGap(22, 22, 22)
+                .addGap(74, 74, 74)
                 .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
+                .addGap(50, 50, 50)
                 .addGroup(panelCrudBotones1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCrudBotones1Layout.createSequentialGroup()
                         .addComponent(lblListaI2, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1301,7 +1312,7 @@ public class InterfazPrincipal extends javax.swing.JFrame
                         .addComponent(lblListaI8, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(90, 90, 90)))
                 .addComponent(btnDetalleVenta)
-                .addGap(71, 71, 71))
+                .addGap(58, 58, 58))
         );
         panelCrudBotones1Layout.setVerticalGroup(
             panelCrudBotones1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2853,8 +2864,8 @@ public class InterfazPrincipal extends javax.swing.JFrame
         String codeElement = this.gt.getCodeElementFromTable(this.tablaInventario);
         int control = this.logica.productController.updateProduct
                                 (codeElement, this.pintor, this.modeloInventario);
-        GestorMensajes mensaje = new GestorMensajes();
-        String alerta = mensaje.getMessageUpdateProduct(control);
+        //GestorMensajes mensaje = new GestorMensajes();
+        String alerta = this.gm.getMessageUpdateProduct(control);
         if(!alerta.equals(""))
             JOptionPane.showMessageDialog(this, alerta);        
     }//GEN-LAST:event_btnModificarComponenteActionPerformed
@@ -2890,10 +2901,9 @@ public class InterfazPrincipal extends javax.swing.JFrame
         int numCompras = this.tequilazo.getBd().getCrudCompra().getCount() + 1;
         if(numCompras == 0)
             JOptionPane.showMessageDialog(this, "Error Consultando El Número De Compras Del Negocio");
-        else
-        {
+        else        
             this.lblNumeroCompra.setText(numCompras + "");
-        }
+        
         this.logica.refrescarContenido(this.panelPrincipal, this.panelCrearCompra);
     }//GEN-LAST:event_txtNuevaCompraMouseClicked
 
@@ -3252,8 +3262,7 @@ public class InterfazPrincipal extends javax.swing.JFrame
         {
             DetalleVenta dv = new DetalleVenta(this, true, null, ven);
             dv.setVisible(true);
-        }
-        
+        }        
     }//GEN-LAST:event_btnVerVentaMouseClicked
 
     private void btnVerCompraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVerCompraMouseClicked
@@ -3437,39 +3446,12 @@ public class InterfazPrincipal extends javax.swing.JFrame
     }//GEN-LAST:event_btnEliminarUnidadActionPerformed
 
     private void btnCajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCajaActionPerformed
-        //////////////////////////////////
         boolean bandera = true;
         PrinterJob pj = PrinterJob.getPrinterJob();
         
         Factura fac = new Factura('c', null);
         bandera = fac.takeOutBox(pj);
         
-//        byte[] open = {27, 112, 0, 55, 121};
-//        //byte[] open = {27,112,0,100,(byte) 250};
-////      byte[] cutter = {29, 86,49};
-//        PrintService pservice = pj.getPrintService();
-//        PrintServiceLookup.lookupDefaultPrintService(); 
-//        DocPrintJob job = pservice.createPrintJob();
-//        DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
-//        Doc doc = new SimpleDoc(open,flavor,null);
-//        PrintRequestAttributeSet aset = new 
-//        HashPrintRequestAttributeSet();
-//        try {
-//            job.print(doc, aset);
-//        } catch (PrintException ex) {
-//            System.out.println(ex.getMessage());
-//            bandera = false;
-//        }
-        
-        
-//        try {
-//            //pj.printDialog();
-//           // pj.print();
-//        } catch (PrinterException e)
-//        {
-//            bandera = false;
-//        }
-        ///////////////////////////////////
         if(bandera)
             JOptionPane.showMessageDialog(this, "              Caja Abierta");
         else
@@ -3599,92 +3581,109 @@ public class InterfazPrincipal extends javax.swing.JFrame
             JOptionPane.showMessageDialog(this, "Error Con La Venta: " + e.getMessage());
         }
         
-        Venta vent;
-        if(numVenta != -1 && !fecha.equals("Error") && total != -1)
-        {
-            //Se crea la venta y se gestiona la base de datos.
-            vent = new Venta(numVenta, cliente, fecha, observ, fuera, total);
-            if(!this.componentesNuevos.isEmpty())
-            {
-                ArrayList<Elemento> newElements = new ArrayList<>();
-                newElements.addAll(this.componentesNuevos);
-                vent.setElementos(newElements);
-                boolean add = this.tequilazo.addSale(vent);
-                if(add)
-                {
-                    //Modifico el inventario, dismuniyo la cantidad a los productos vendido.
-                    boolean ban = this.tequilazo.getBd().getCrudElementoVendido().modifyInventorySale
-                            (this.tequilazo.getInventario().getComponentes(), componentesNuevos);
-                    if(ban)
-                    {
-                        this.tequilazo.getVentas().add(vent);
-                        this.clienteVenta = new Cliente("","","");
-                        //////////////////////////////////
-                        int opc = JOptionPane.showConfirmDialog(null, "Desea Imprimir Factura?",
-                                "Imprimir Factura", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-                        //0 para si || 1 para no
-                        if (opc == 0)
-                        {
-                            PrinterJob pj = PrinterJob.getPrinterJob();
-                            Factura fac = new Factura('v', vent);
-                            pj.setPrintable(fac,fac.getPageFormat(pj));
-                            try 
-                            {
-                                //pj.printDialog();
-                                pj.print();
-                            } catch (PrinterException e) 
-                            {
-                                JOptionPane.showMessageDialog(this, "Error Con La Impresión");
-                            }  
-                            
-                            int opc2 = JOptionPane.showConfirmDialog(null, "Desea Imprimir Copia?",
-                                "Imprimir Copia", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-                            if (opc2 == 0)
-                            {
-                                PrinterJob pj2 = PrinterJob.getPrinterJob();
-                                Factura fac2 = new Factura('v', vent);
-                                pj.setPrintable(fac2,fac.getPageFormat(pj2));
-                                try 
-                                {
-                                    //pj.printDialog();
-                                    pj.print();
-                                } catch (PrinterException e) 
-                                {
-                                    JOptionPane.showMessageDialog(this, "Error Con La Impresión");
-                                }
-                            }                        
-                        }    
-                        else
-                        {
-                            PrinterJob pj = PrinterJob.getPrinterJob();
-                            Factura fac = new Factura('c', null);
-                            fac.takeOutBox(pj);
-                        }
-                        ///////////////////////////////////
-                        this.pintor.paintTableInventory(this.modeloInventario, 
-                                this.tequilazo.getInventario().getComponentes(), false);
-                        JOptionPane.showMessageDialog(this, "Venta Registrada Correctamente");
-                        this.componentesNuevos.clear();
-                        this.pintor.clearDataFromTable(this.modeloResumenVenta);
-                        this.txtObservacionesVenta.setText("");
-                        this.txtTotalResumenVenta.setText("0");
-                        ArrayList<Venta> ven = this.tequilazo.getDailySales();
-                        this.pintor.paintTableDailySales(modeloVentasDia, ven);  
-                    }                            
-                    else
-                        JOptionPane.showMessageDialog(this, "No Fue Posible Registrar La Venta: "
-                                + "ERROR HACIENDO LA MODIFICACIÓN EN LA BASE DE DATOS");
-                }
-                else
-                    JOptionPane.showMessageDialog(this, "No Se Pudo Registrar La Venta: "
-                            + "nO SE PUDO AÑADIR LA VENTA A LA LÓGICA");
-            }
-            else
-                JOptionPane.showMessageDialog(this, "No Ha Agregado Productos A La Venta");
-        }
-        else
-            JOptionPane.showMessageDialog(this, "Error Intentando Registrar La Venta: "
-                    + "ERROR EN LA VALIDACIÓN PRINCIPAL");
+        int msj = this.saleController.createSale(numVenta, fecha, observ, cliente, fuera, 
+                                                total, this.componentesNuevos);
+        String mostrar = this.gm.getMessageCreateSale(msj);
+        JOptionPane.showMessageDialog(this, mostrar);
+        
+        
+//        
+//        Venta vent;
+//        if(numVenta != -1 && !fecha.equals("Error") && total != -1)
+//        {
+//            //Se crea la venta y se gestiona la base de datos.
+//            vent = new Venta(numVenta, cliente, fecha, observ, fuera, total);
+//            if(!this.componentesNuevos.isEmpty())
+//            {
+//                ArrayList<Elemento> newElements = new ArrayList<>();
+//                newElements.addAll(this.componentesNuevos);
+//                vent.setElementos(newElements);
+//                boolean add = this.tequilazo.addSale(vent);
+//                if(add)
+//                {
+//                    //Modifico el inventario, dismuniyo la cantidad a los productos vendido.
+//                    boolean ban = this.tequilazo.getBd().getCrudElementoVendido().modifyInventorySale
+//                            (this.tequilazo.getInventario().getComponentes(), componentesNuevos);
+//                    if(ban)
+//                    {
+//                        this.tequilazo.getVentas().add(vent);
+//                        this.clienteVenta = new Cliente("","","");
+//                        //////////////////////////////////
+//                        int opc = JOptionPane.showConfirmDialog(null, "Desea Imprimir Factura?",
+//                                "Imprimir Factura", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+//                        //0 para si || 1 para no
+//                        if (opc == 0)
+//                        {
+//                            PrinterJob pj = PrinterJob.getPrinterJob();
+//                            Factura fac = new Factura('v', vent);
+//                            pj.setPrintable(fac,fac.getPageFormat(pj));
+//                            try 
+//                            {
+//                                pj.print();
+//                            } catch (PrinterException e) 
+//                            {
+//                                JOptionPane.showMessageDialog(this, "Error Con La Impresión");
+//                            }  
+//                            
+//                            int opc2 = JOptionPane.showConfirmDialog(null, "Desea Imprimir Copia?",
+//                                "Imprimir Copia", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+//                            if (opc2 == 0)
+//                            {
+//                                PrinterJob pj2 = PrinterJob.getPrinterJob();
+//                                Factura fac2 = new Factura('v', vent);
+//                                pj.setPrintable(fac2,fac.getPageFormat(pj2));
+//                                try 
+//                                {
+//                                    //pj.printDialog();
+//                                    pj.print();
+//                                } catch (PrinterException e) 
+//                                {
+//                                    JOptionPane.showMessageDialog(this, "Error Con La Impresión");
+//                                }
+//                            }                        
+//                        }    
+//                        else
+//                        {
+//                            PrinterJob pj = PrinterJob.getPrinterJob();
+//                            Factura fac = new Factura('c', null);
+//                            fac.takeOutBox(pj);
+//                        }
+//                        ///////////////////////////////////
+//                        this.pintor.paintTableInventory(this.modeloInventario, 
+//                                this.tequilazo.getInventario().getComponentes(), false);
+//                        JOptionPane.showMessageDialog(this, "Venta Registrada Correctamente");
+//                        this.componentesNuevos.clear();
+//                        this.pintor.clearDataFromTable(this.modeloResumenVenta);
+//                        this.txtObservacionesVenta.setText("");
+//                        this.txtTotalResumenVenta.setText("0");
+//                        ArrayList<Venta> ven = this.tequilazo.getDailySales();
+//                        this.pintor.paintTableDailySales(modeloVentasDia, ven);  
+//                    }                            
+//                    else
+//                        JOptionPane.showMessageDialog(this, "No Fue Posible Registrar La Venta: "
+//                                + "ERROR HACIENDO LA MODIFICACIÓN EN LA BASE DE DATOS");
+//                }
+//                else
+//                    JOptionPane.showMessageDialog(this, "No Se Pudo Registrar La Venta: "
+//                            + "nO SE PUDO AÑADIR LA VENTA A LA LÓGICA");
+//            }
+//            else
+//                JOptionPane.showMessageDialog(this, "No Ha Agregado Productos A La Venta");
+//        }
+//        else
+//            JOptionPane.showMessageDialog(this, "Error Intentando Registrar La Venta: "
+//                    + "ERROR EN LA VALIDACIÓN PRINCIPAL");
+        
+        ///////////////////////////////////
+        this.pintor.paintTableInventory(this.modeloInventario, 
+                this.tequilazo.getInventario().getComponentes(), false);
+        //JOptionPane.showMessageDialog(this, "Venta Registrada Correctamente");
+        this.componentesNuevos.clear();
+        this.pintor.clearDataFromTable(this.modeloResumenVenta);
+        this.txtObservacionesVenta.setText("");
+        this.txtTotalResumenVenta.setText("0");
+        ArrayList<Venta> ven = this.tequilazo.getDailySales();
+        this.pintor.paintTableDailySales(modeloVentasDia, ven); 
         
         this.logica.crearInteractividadBotones(this.panelNuevaVenta, this.txtNuevaVenta, false);
         this.logica.refrescarContenido(this.panelPrincipal, this.panelInicio);
