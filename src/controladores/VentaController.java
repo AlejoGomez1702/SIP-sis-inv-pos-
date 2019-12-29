@@ -1,6 +1,5 @@
 package controladores;
 
-import dialogos.ListaProductos;
 import java.util.ArrayList;
 import logica.Elemento;
 import logica.Tequilazo;

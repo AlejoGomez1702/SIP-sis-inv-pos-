@@ -2,8 +2,6 @@ package principal;
 import controladores.VentaController;
 import dialogos.*;
 import java.awt.Color;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 import java.text.SimpleDateFormat;
