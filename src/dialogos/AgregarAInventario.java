@@ -292,10 +292,7 @@ public class AgregarAInventario extends javax.swing.JDialog
     {
         this.txtPrecioVenta.setText((int)precioVenta+"");
     }
-//    public void setPrecioVentaFuera(double precioVentaFuera)
-//    {
-//        this.txtPrecioVentaFuera.setText((int)precioVentaFuera+"");
-//    }
+    
     public void setCantAct(int cant)
     {
         this.spinCant.setValue(cant);
