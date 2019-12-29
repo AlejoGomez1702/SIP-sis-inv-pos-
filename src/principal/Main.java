@@ -1,11 +1,7 @@
 package principal;
 import bd.BaseDatos;
 import bd.Conexion;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import logica.gestores.Caja;
 import logica.Compra;

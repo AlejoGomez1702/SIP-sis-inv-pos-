@@ -1,4 +1,5 @@
 package principal;
+import controladores.ProductoController;
 import controladores.VentaController;
 import dialogos.*;
 import java.awt.Color;
@@ -26,6 +27,7 @@ import logica.Proveedor;
 import logica.bd.Categoria;
 import logica.bd.Marca;
 import logica.bd.UnidadMedida;
+import logicainterfaz.GestorMensajes;
 import logicainterfaz.GestorTablas;
 import logicainterfaz.PintorTablas;
 
@@ -132,6 +134,16 @@ public class InterfazPrincipal extends javax.swing.JFrame
     
     //Controlador de ventas, la primera implementación es para la venta rápida.
     private VentaController ventaController;
+    
+    /**
+     * Gestiona los mensajes que se le muestran al usuario.
+     */
+    private GestorMensajes gm;
+    
+    /**
+     * Controlador para los productos que se gestionan en el inventario.
+     */
+    private ProductoController productController;
      
     
     public InterfazPrincipal(Tequilazo tequilazo) 
@@ -149,6 +161,8 @@ public class InterfazPrincipal extends javax.swing.JFrame
         this.componentesNuevos = new ArrayList<>();
         this.initInformation();
         this.clienteVenta = new Cliente("","","");
+        this.gm = new GestorMensajes();
+        this.productController = new ProductoController(tequilazo);
                      
     }
     
