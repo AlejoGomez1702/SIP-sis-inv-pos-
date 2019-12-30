@@ -190,7 +190,7 @@ public class AgregarAInventario extends javax.swing.JDialog
         double precioComp = -99;
         try 
         {
-            precioComp = Double.parseDouble(this.txtPrecioCompra.getText().replace(".",""));
+            precioComp = Double.parseDouble(this.txtPrecioCompra.getText().replace(",","."));
             //Precio de compra negativo.
             if(precioComp < 0)
                 return 7;
@@ -203,7 +203,7 @@ public class AgregarAInventario extends javax.swing.JDialog
         double precioVent = -99;
         try 
         {
-            precioVent = Double.parseDouble(this.txtPrecioVenta.getText().replace(".",""));
+            precioVent = Double.parseDouble(this.txtPrecioVenta.getText().replace(",","."));
             //Precio de venta negativo.
             if(precioVent < 0)
                 return 9;
@@ -660,7 +660,7 @@ public class AgregarAInventario extends javax.swing.JDialog
     }//GEN-LAST:event_txtSalirMouseClicked
 
     private void txtPrecioCompraKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioCompraKeyReleased
-        this.validatePoints(this.txtPrecioCompra);
+        //this.validatePoints(this.txtPrecioCompra);
     }//GEN-LAST:event_txtPrecioCompraKeyReleased
 
     private void txtPrecioVentaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPrecioVentaMouseReleased
@@ -668,7 +668,7 @@ public class AgregarAInventario extends javax.swing.JDialog
     }//GEN-LAST:event_txtPrecioVentaMouseReleased
 
     private void txtPrecioVentaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioVentaKeyReleased
-        this.validatePoints(this.txtPrecioVenta);
+        //this.validatePoints(this.txtPrecioVenta);
     }//GEN-LAST:event_txtPrecioVentaKeyReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

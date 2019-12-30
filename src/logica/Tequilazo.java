@@ -308,35 +308,20 @@ public class Tequilazo
         ArrayList<Integer> salesId = this.bd.getCrudVenta().
                                     getDailySales(initialDate, finishDate);
         
+        System.out.println("SACO " + salesId.size() + " Ventas");
+        
         int countDailySales = salesId.size();
         Venta auxVenta;
+        int auxId;
         for (int i = 0; i < countDailySales; i++) 
         {
-            auxVenta = this.getSaleFromId(salesId.get(i));
-            dailySales.add(auxVenta);
+            auxId = salesId.get(i);
+            auxVenta = this.bd.getCrudVenta().getSaleFromId(auxId);
+            if(auxVenta != null)
+                dailySales.add(auxVenta);
             //System.out.println("Venta del dia: " + salesId.get(i));            
         }
-        
-        
-        
-//        GestorFecha gf = new GestorFecha();
-//        gf.getDateDaily(this.ldt);       
-//        
-//        int numVent = this.ventas.size();
-//        Venta auxVenta;
-//        GestorFecha auxFechVent;
-//        boolean ban = false;
-//        for(int i = 0; i < numVent; i++) 
-//        {
-//            auxVenta = this.ventas.get(i);
-//            auxFechVent = new GestorFecha(auxVenta.getFechaHora());
-//            ban = gf.compareDates(auxFechVent, gf);
-//            if(ban)
-//            {
-//                dailySales.add(auxVenta);
-//            }                
-//        }
-        
+               
         return dailySales;
     }
         

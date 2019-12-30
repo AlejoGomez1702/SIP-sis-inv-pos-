@@ -59,7 +59,7 @@ public class PintorTablas
         {
             compra = purchases.get(i);
             String [] fila ={compra.getId()+"", compra.getFechaHora()+"", 
-                compra.getProveedor().getNombre(),(int)compra.getValor()+"", compra.getObservacion()};
+                compra.getProveedor().getNombre(),compra.getValor()+"", compra.getObservacion()};
             modelPurchases.addRow(fila);
         }
     }
@@ -79,7 +79,7 @@ public class PintorTablas
         {
             venta = sales.get(i);
             String [] fila ={venta.getId()+"", venta.getFechaHora()+"", 
-                venta.getCliente().getNombre(),(int)venta.getValor()+"", 
+                venta.getCliente().getNombre(),venta.getValor()+"", 
                 venta.getObservacion()};
             modelTable.addRow(fila);
         }
@@ -105,11 +105,11 @@ public class PintorTablas
             totalUnit = el.getPrecioCompra()*el.getCantidadSale();
             total += totalUnit;
             String[] datos ={el.getCodigo(), el.getProducto().getNombre(), el.getMarca(),
-            el.getUnidadMedida(), el.getCantidadSale()+"", (int)el.getPrecioCompra()+"", (int)totalUnit+""};
+            el.getUnidadMedida(), el.getCantidadSale()+"", el.getPrecioCompra()+"", totalUnit+""};
             modelTable.addRow(datos); 
         }
         
-        campTotal.setText((int)total+"");        
+        campTotal.setText(total+"");        
     }
     
     /**
@@ -148,11 +148,11 @@ public class PintorTablas
             
             total += totalUnit;
             Object[] datos ={el.getCodigo(), el.getProducto().getNombre(), el.getMarca(),
-            el.getUnidadMedida(), el.getCantidadSale()+"", (int)precio+"", (int)totalUnit+""};
+            el.getUnidadMedida(), el.getCantidadSale()+"", precio+"", totalUnit+""};
             modelTable.addRow(datos); 
         }
         
-        campTotal.setText((int)total+"");        
+        campTotal.setText(total+"");        
     }    
             
     /**
@@ -177,8 +177,8 @@ public class PintorTablas
             if(!small)
             {
                 String[] fila = {comp.getCodigo(), prod.getNombre(), comp.getMarca(),
-                comp.getUnidadMedida(), comp.getStock()+"", (int)comp.getPrecioCompra()+"", 
-                (int)comp.getPrecioVenta()+"", comp.getCantidadActual()+""};
+                comp.getUnidadMedida(), comp.getStock()+"", comp.getPrecioCompra()+"", 
+                comp.getPrecioVenta()+"", comp.getCantidadActual()+""};
 
                 modelTable.addRow(fila);
             }
@@ -275,18 +275,18 @@ public class PintorTablas
             for (int i = 0; i < numSal; i++)
             {
                 venta = sales.get(i);
-
-
                 String [] fila ={venta.getId()+"", venta.getCliente().getNombre(),
-                                                            (int)venta.getValor()+""};
+                                                            venta.getValor()+""};
                 modelTable.addRow(fila);
             }
         } catch (Exception e) 
         {
+            /////////////////************************
+            /////////////////************************
+            /////////////////************************
+            ///ERRRRROOOOORRRRR
             System.out.println(e.getMessage() + " : MENSAJE");
         }
-            //System.out.println(e.getM);
-        
     }    
     
     /**
@@ -303,7 +303,7 @@ public class PintorTablas
         {
             compra = purchases.get(i);
             String [] fila ={compra.getId()+"", compra.getProveedor().getNombre(),
-                                                        (int)compra.getValor()+""};
+                                                        compra.getValor()+""};
             modelTable.addRow(fila);
         }
     }
