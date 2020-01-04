@@ -350,7 +350,7 @@ public class InterfazPrincipal extends javax.swing.JFrame
         btnCrearVenta = new javax.swing.JButton();
         btnMichelada = new javax.swing.JButton();
         lblIconoProductos3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtCode = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         panelScanner = new javax.swing.JPanel();
@@ -2092,12 +2092,25 @@ public class InterfazPrincipal extends javax.swing.JFrame
 
         lblIconoProductos3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Scanner.png"))); // NOI18N
 
-        jTextField1.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
+        txtCode.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
+        txtCode.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCodeKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCodeKeyReleased(evt);
+            }
+        });
 
         jButton1.setBackground(new java.awt.Color(255, 51, 51));
         jButton1.setFont(new java.awt.Font("Cambria", 0, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Borrar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel12.setText("Escanear Código");
 
@@ -2141,7 +2154,7 @@ public class InterfazPrincipal extends javax.swing.JFrame
                                 .addGap(55, 55, 55)
                                 .addComponent(lblIconoProductos3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtCode, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(47, 47, 47))
@@ -2178,7 +2191,7 @@ public class InterfazPrincipal extends javax.swing.JFrame
                         .addComponent(lblIconoProductos3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(lblProveedores1)
                     .addGroup(panelCrearVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtCode, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButton1)))
                 .addGap(18, 18, 18)
                 .addGroup(panelCrearVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3864,6 +3877,53 @@ public class InterfazPrincipal extends javax.swing.JFrame
             this.pintor.paintTableSales(sales, this.modeloVentasCreadas);             
         }
     }//GEN-LAST:event_btnBuscarVentasActionPerformed
+
+    private void txtCodeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodeKeyReleased
+        String code = this.txtCode.getText().toLowerCase();
+        if(code.length() > 6)
+        {
+            Elemento el = (Elemento) this.tequilazo.getMap().get(code);
+            if(el != null)
+            {
+                //System.out.println("EL CÓDIIGOOOO ESSS: "+ el.getCodigo());
+                this.saleController.addProduct(el.getCodigo());
+                this.txtCode.setText("");
+            }            
+        }
+        
+        this.componentesNuevos = this.saleController.getElementsSale();
+        if(this.componentesNuevos != null)
+            this.pintor.paintTableSumarySale(this.modeloResumenVenta, 
+                    this.componentesNuevos, this.txtTotalResumenVenta, false);
+    }//GEN-LAST:event_txtCodeKeyReleased
+
+    private void txtCodeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodeKeyPressed
+        String code = this.txtCode.getText();
+        if(code.length() > 6)
+        {
+            Elemento el = (Elemento) this.tequilazo.getMap().get(code);
+            //System.out.println("EL CÓDIIGOOOO ESSS: "+ el.getCodigo());
+            if(el != null)   
+            {
+                this.saleController.addProduct(el.getCodigo()); 
+                this.txtCode.setText(""); 
+            }
+                                           
+//            else            
+//                JOptionPane.showMessageDialog(this, "Código No Registrado");
+//            
+//            this.txtCode.setText("");    
+        }
+        
+        this.componentesNuevos = this.saleController.getElementsSale();
+        if(this.componentesNuevos != null)        
+            this.pintor.paintTableSumarySale(this.modeloResumenVenta, 
+                    this.componentesNuevos, this.txtTotalResumenVenta, false);
+    }//GEN-LAST:event_txtCodeKeyPressed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.txtCode.setText("");
+    }//GEN-LAST:event_jButton1ActionPerformed
     
     /**
      * Hace todo el proceso para agregar un proveedor al hacer click en nuevo.
@@ -3981,7 +4041,6 @@ public class InterfazPrincipal extends javax.swing.JFrame
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblCategorias;
     private javax.swing.JLabel lblFecha;
     private javax.swing.JLabel lblFecha2;
@@ -4073,6 +4132,7 @@ public class InterfazPrincipal extends javax.swing.JFrame
     private javax.swing.JTable tablaVentasDia;
     private javax.swing.JLabel txtAjustes;
     private javax.swing.JTextField txtBuscarInventario;
+    private javax.swing.JTextField txtCode;
     private javax.swing.JLabel txtCompras;
     private javax.swing.JLabel txtEncabezado;
     private javax.swing.JLabel txtFecha;

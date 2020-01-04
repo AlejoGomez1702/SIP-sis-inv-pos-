@@ -130,7 +130,7 @@ public class PintorTablas
         double totalUnit = 0;
         double total = 0;
         double precio;
-        for (int i = 0; i < elements.size(); i++)
+        for(int i = 0; i < elements.size(); i++)
         {
             el = elements.get(i);
             if(fuera)  
