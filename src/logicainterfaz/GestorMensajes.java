@@ -161,4 +161,33 @@ public class GestorMensajes
         return muestra;
     }
     
+    /**
+     * Obtiene el mensaje que se debe mostrar según el estado en el cual 
+     * termino el proceso de michelar cervezas en el negocio.
+     * @param message Indicador que se envia desde la logica del error.
+     * @return Mensaje que se le debe mostrar al usuario.
+     */
+    public String getMessageMichelar(int message)
+    {
+        String muestra = "";
+        switch(message)
+        {  
+            case (1):
+                muestra = "ERROR, No Seleccionó Ningúna Cerveza Para Michelar";
+                break;
+                
+            case (2):
+                muestra = "ERROR, Debe Seleccionar Máximo La Cantidad De "
+                        + "Cervezas Agregadas En La Venta";
+                break;
+                               
+            //Caso Válido.
+            case (10):
+                muestra = "ok";
+                break;      
+        }       
+        
+        return muestra;
+    }
+    
 }

@@ -15,7 +15,6 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
-import javax.swing.border.MatteBorder;
 import logica.Tequilazo;
 
 /**
@@ -24,7 +23,6 @@ import logica.Tequilazo;
  * ...y ademas del estilo grafico realzia las funcionalidades...
  * ...de los eventos que se realizan en esta interfaz.
  * @author Luis Alejandro Gómez C.
- * @author Ever Peña B.
  * @version 1.0 .
  */
 public class LogicaInterfaz 

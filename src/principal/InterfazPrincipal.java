@@ -1,4 +1,5 @@
 package principal;
+import controladores.MicheladaController;
 import controladores.VentaController;
 import dialogos.*;
 import java.awt.Color;
@@ -136,6 +137,11 @@ public class InterfazPrincipal extends javax.swing.JFrame
     private VentaController saleController;
     
     /**
+     * Controlador para la gestión de las cervezas micheladas.
+     */
+    private MicheladaController micheladaController;
+    
+    /**
      * Permite la gestión de los mensajes que se le muestran al usuario.
      */
     private GestorMensajes gm;
@@ -157,6 +163,7 @@ public class InterfazPrincipal extends javax.swing.JFrame
         this.initInformation();
         this.clienteVenta = new Cliente("","","");
         this.gm = new GestorMensajes();
+        this.micheladaController = new MicheladaController(tequilazo);
     }
     
     /**
@@ -3834,14 +3841,16 @@ public class InterfazPrincipal extends javax.swing.JFrame
 
     private void btnMicheladaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMicheladaActionPerformed
         String codeEl = this.gt.getCodeElementFromTable(this.tablaDetalleVenta);
-        if(codeEl != null)
+        int codeMsj = this.micheladaController.michelarCerveza(codeEl, componentesNuevos);
+        String msj = this.gm.getMessageMichelar(codeMsj);
+        if(!msj.equals("ok"))
         {
-            this.tequilazo.verifyExistDatail(codeEl, componentesNuevos, 2);
-            this.pintor.paintTableSumarySale(this.modeloResumenVenta, 
-                        this.componentesNuevos, this.txtTotalResumenVenta,checFuera.isSelected());
+            JOptionPane.showMessageDialog(this, msj);
         }
-        else
-            JOptionPane.showMessageDialog(this, "No Selecciono Ningún Elemento");
+        
+        this.pintor.paintTableSumarySale(this.modeloResumenVenta, 
+                this.componentesNuevos, this.txtTotalResumenVenta,checFuera.isSelected());
+        
     }//GEN-LAST:event_btnMicheladaActionPerformed
 
     private void btnBuscarVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarVentasActionPerformed

@@ -23,7 +23,7 @@ public class CantidadProducto extends javax.swing.JDialog
      * @param modal Modalidad.
      * @param nombre Nombre del producto que se desea vender o comprar.
      */
-    public CantidadProducto( java.awt.Dialog parent,boolean modal,String nombre) 
+    public CantidadProducto(java.awt.Dialog parent, boolean modal, String nombre) 
     {
         super(parent, modal);
         initComponents();
@@ -193,8 +193,6 @@ public class CantidadProducto extends javax.swing.JDialog
             JOptionPane.showMessageDialog(this,"Por Favor Digite Un Valor Númerico");
         }       
     }//GEN-LAST:event_btnAceptarActionPerformed
-
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;

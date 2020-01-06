@@ -418,8 +418,6 @@ public class Tequilazo
         return map;
     }
     
-    
-    
     public ArrayList<Proveedor> getProveedores() {
         return proveedores;
     }
@@ -469,6 +467,26 @@ public class Tequilazo
         return bandera;
     }
     
+    public void deleteMichelada(Venta sale)
+    {
+        String micheladaCode = "miche";
+        ArrayList<Elemento> elements = sale.getElementos();
+        int num = elements.size();
+        Elemento aux;
+        String codeAux;
+        
+        for(int i = 0; i < num; i++) 
+        {
+            aux = elements.get(i);
+            codeAux = aux.getCodigo();
+            if(codeAux.equals(micheladaCode))
+            {
+                elements.remove(i);
+                break;
+            }                
+        }
+    }
+    
     /**
      * Verifica si una venta o compra está, y la elimina o agrega michelada. 
      * (Se usa para el boton (remover/michelada)de la tabla de resumen de ventas o compras).
@@ -477,7 +495,8 @@ public class Tequilazo
      * @param indice 1=>remover, 2=>michelada.
      * @return True==>Se (removio, michelo), else==>False.
      */
-    public boolean verifyExistDatail(String code, ArrayList<Elemento> elements, int indice)
+    public boolean verifyExistDatail(String code, ArrayList<Elemento> elements,
+                                                                    int indice)
     {
         if(code == null || elements == null)
             return false;
@@ -533,5 +552,11 @@ public class Tequilazo
     public LocalDateTime getLdt() {
         return ldt;
     }
+
+    public double getVALOR_MICHELADA() {
+        return VALOR_MICHELADA;
+    }
+    
+    
         
 }
