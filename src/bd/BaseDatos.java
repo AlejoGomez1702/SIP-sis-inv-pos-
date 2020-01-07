@@ -69,6 +69,11 @@ public class BaseDatos
     private CrudScanner crudScanner;
     
     /**
+     * CRUD de la tabla "michelada" de la base de datos.
+     */
+    private CrudMichelada crudMichelada;
+    
+    /**
      * Prepara todos los cruds con la base de datos.
      * @param con Conexión con la base de datos.
      */
@@ -86,6 +91,7 @@ public class BaseDatos
         this.crudVenta = new CrudVenta(con);
         this.crudElementoVendido = new CrudElementoVendido(con);
         this.crudScanner = new CrudScanner(con);
+        this.crudMichelada = new CrudMichelada(con);
     }
     
     /**
@@ -188,6 +194,15 @@ public class BaseDatos
     {
         return crudScanner;
     }    
+
+    /**
+     * Obtiene el CRUD de la tabla que permite modificar el valor de las micheladas.
+     * @return CRUD de micheladas del negocio.
+     */
+    public CrudMichelada getCrudMichelada() 
+    {
+        return crudMichelada;
+    }
             
     /**
      * Obtiene la conexión con la base de datos del sistema.

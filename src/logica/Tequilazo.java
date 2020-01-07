@@ -79,7 +79,7 @@ public class Tequilazo
     /**
      * Valor adicional que se le aumenta por estar michelado.
      */
-    private final double VALOR_MICHELADA = 800;
+    private final double VALOR_MICHELADA;
     
     /**
      * Listado de unidades de medida que se comercializan en el negocio.
@@ -101,6 +101,7 @@ public class Tequilazo
         this.ventas=new ArrayList();
         this.ldt = LocalDateTime.now();
         this.reporte = new Reporte();
+        this.VALOR_MICHELADA = this.bd.getCrudMichelada().readPrice();
     }
     
     /**

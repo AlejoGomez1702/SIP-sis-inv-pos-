@@ -2,6 +2,7 @@ package controladores;
 
 import dialogos.CantidadProducto;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import logica.Elemento;
 import logica.Producto;
 import logica.Tequilazo;
@@ -26,6 +27,40 @@ public class MicheladaController
     public MicheladaController(Tequilazo tequilazo) 
     {
         this.tequilazo = tequilazo;
+    }
+    
+    /**
+     * Actualiza el precio de las cervezas micheladas del negocio.
+     * @return True => Actualizó, False => No se pudo actualizar.
+     */
+    public boolean updatePrice()
+    {
+        boolean bandera = false;
+        double precio;
+        String ingresado = JOptionPane.showInputDialog(null, 
+                "Ingrese El Precio Que Le Desea Asignar A Las Micheladas",
+                (int) this.tequilazo.getBd().getCrudMichelada().readPrice() + "");
+        
+        if(ingresado != null)
+        {
+            try 
+            {
+                precio = Double.parseDouble(ingresado);
+            } catch (NumberFormatException e) 
+            {
+                return false;
+            }
+
+            if(precio > 0)
+            {
+                boolean modifico = this.tequilazo.getBd().getCrudMichelada()
+                                                               .updatePrice(precio);
+                if(modifico)
+                    return true;
+            }
+        }
+
+        return bandera;
     }
 
     /**

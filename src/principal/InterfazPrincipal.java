@@ -261,6 +261,8 @@ public class InterfazPrincipal extends javax.swing.JFrame
         lblIconoProductos1 = new javax.swing.JLabel();
         btnMenudeo = new javax.swing.JButton();
         lblIconoProductos5 = new javax.swing.JLabel();
+        btnModificarMichelada = new javax.swing.JButton();
+        lblIconoProductos6 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
         panelVentas = new javax.swing.JPanel();
         panelCrudBotones1 = new javax.swing.JPanel();
@@ -1196,13 +1198,32 @@ public class InterfazPrincipal extends javax.swing.JFrame
 
         lblIconoProductos5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icono_menudeo.png"))); // NOI18N
 
+        btnModificarMichelada.setBackground(new java.awt.Color(64, 154, 102));
+        btnModificarMichelada.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnModificarMichelada.setForeground(new java.awt.Color(255, 255, 255));
+        btnModificarMichelada.setText("Modificar Michelada");
+        btnModificarMichelada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarMicheladaActionPerformed(evt);
+            }
+        });
+
+        lblIconoProductos6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icono-cerveza.png"))); // NOI18N
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(37, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 818, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(25, 25, 25))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                            .addComponent(lblListaI)
+                            .addGap(317, 317, 317)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(lblIconoProductos1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -1211,14 +1232,11 @@ public class InterfazPrincipal extends javax.swing.JFrame
                         .addComponent(lblIconoProductos5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnMenudeo, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 818, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(25, 25, 25))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                            .addComponent(lblListaI)
-                            .addGap(317, 317, 317)))))
+                        .addGap(83, 83, 83)
+                        .addComponent(lblIconoProductos6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnModificarMichelada)
+                        .addContainerGap())))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1231,7 +1249,9 @@ public class InterfazPrincipal extends javax.swing.JFrame
                     .addComponent(lblIconoProductos1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnImprimirInventario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnMenudeo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblIconoProductos5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblIconoProductos5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnModificarMichelada, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblIconoProductos6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
@@ -3933,6 +3953,12 @@ public class InterfazPrincipal extends javax.swing.JFrame
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.txtCode.setText("");
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnModificarMicheladaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarMicheladaActionPerformed
+        boolean modifico = this.micheladaController.updatePrice();
+        if(modifico)
+            JOptionPane.showMessageDialog(this, "Valor Modificado Correctamente");
+    }//GEN-LAST:event_btnModificarMicheladaActionPerformed
     
     /**
      * Hace todo el proceso para agregar un proveedor al hacer click en nuevo.
@@ -3990,6 +4016,7 @@ public class InterfazPrincipal extends javax.swing.JFrame
     private javax.swing.JButton btnModificarCategoria;
     private javax.swing.JButton btnModificarComponente;
     private javax.swing.JButton btnModificarMarca;
+    private javax.swing.JButton btnModificarMichelada;
     private javax.swing.JButton btnModificarProveedor;
     private javax.swing.JButton btnModificarUnidades;
     private javax.swing.JButton btnRemover;
@@ -4060,6 +4087,7 @@ public class InterfazPrincipal extends javax.swing.JFrame
     private javax.swing.JLabel lblIconoProductos2;
     private javax.swing.JLabel lblIconoProductos3;
     private javax.swing.JLabel lblIconoProductos5;
+    private javax.swing.JLabel lblIconoProductos6;
     private javax.swing.JLabel lblIngreso;
     private javax.swing.JLabel lblIngreso1;
     private javax.swing.JLabel lblListaI;
